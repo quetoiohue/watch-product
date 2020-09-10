@@ -2,8 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Products;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +17,20 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Products::class, function (Faker $faker) {
     $created = date('Y-m-d H:i:s', mt_rand(time() - 86400 * 7, time()));
 
+    $productId = $faker->ean8();
+
     return [
+        'user_id' => $faker->randomElement(range(1,30)),
+        'link' => "https://tiki.vn/p$productId.html",
+        'image' => $faker->unique()->safeEmail,
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'telephone' => $faker->phoneNumber(),
-        'total_point' => $faker->numberBetween($min=10, $max=50),
+        'actual_price' => $faker->randomFloat(100000, 10000000), // password
+        'old_price' => $faker->randomFloat(100000, 10000000),
+        'discount' => $faker->randomFloat(0, 80),
+        'quantity' => $faker->numberBetween(0, 20),
         'created_at' => $created,
     ];
 });

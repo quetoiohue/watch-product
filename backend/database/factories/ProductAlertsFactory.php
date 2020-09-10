@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\ProductAlerts;
 use Faker\Generator as Faker;
 
 /*
@@ -16,16 +16,11 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
-    $created = date('Y-m-d H:i:s', mt_rand(time() - 86400 * 7, time()));
-
+$factory->define(ProductAlerts::class, function (Faker $faker) {
+    
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'telephone' => $faker->phoneNumber(),
-        'total_point' => $faker->numberBetween($min=10, $max=50),
-        'created_at' => $created,
+        'alert_type_id'=> $faker->randomElement(range(1,3)),
+        'product_id'=> $faker->numberBetween($min=0, $max=50),
+        'status' => $faker->boolean($chanceOfGettingTrue = 50)
     ];
 });
