@@ -32,6 +32,8 @@ function getProductByURL($product_url) {
     $product->price = $product_item["price"];
     $product->price_max = $product_item["list_price"];
     $product->imageURL = $product_item["thumbnail_url"];
+    $product->discount = $product_item['discount_rate'];
+    $product->inventory_status = $product_item['inventory_status'];
     if (array_key_exists("configurable_products", $product_item)) {
         $product->imageURL = $product_item["configurable_products"][0]["images"][0]["large_url"];
     }
