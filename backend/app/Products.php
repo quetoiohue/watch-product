@@ -14,10 +14,11 @@ class Products extends Model
     "link", 
     "image",
     "name",
+    "currency",
     "actual_price",
     "old_price",
     "discount",
-    "quantity"
+    "inventory_status"
 ];
 
   public function user() {

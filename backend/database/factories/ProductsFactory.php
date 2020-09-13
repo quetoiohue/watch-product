@@ -30,7 +30,7 @@ $factory->define(Products::class, function (Faker $faker) {
         'actual_price' => $faker->randomFloat(100000, 10000000), // password
         'old_price' => $faker->randomFloat(100000, 10000000),
         'discount' => $faker->randomFloat(0, 80),
-        'quantity' => $faker->numberBetween(0, 20),
+        'inventory_status' => "available",
         'created_at' => $created,
     ];
 });

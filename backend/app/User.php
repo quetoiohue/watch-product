@@ -26,7 +26,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password', 'remember_token',
+        'api_token'
     ];
 
     /**
@@ -40,5 +41,16 @@ class User extends Authenticatable
 
     public function products() {
         return $this->hasMany('App\Products', 'user_id', 'id');
+    }
+
+    public function productAlerts() {
+        return $this->hasManyThrough(
+            'App\ProductAlerts',
+            'App\Products',
+            'user_id', // Foreign key on users table...
+            'product_id', // Foreign key on posts table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        );
     }
 }
