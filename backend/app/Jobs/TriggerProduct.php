@@ -3,6 +3,7 @@
 namespace App\Jobs; 
 
 use App\Http\Controllers\API\ProductsController;
+use App\Mail\TriggerMail;
 use App\ProductHistories;
 use App\Products;
 use Illuminate\Bus\Queueable;
@@ -10,6 +11,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class TriggerProduct implements ShouldQueue 
 {
@@ -36,31 +39,38 @@ class TriggerProduct implements ShouldQueue
     {
         $productLink = $this->product->link;
         $productInfo = (new ProductsController)->getProductInfoByLink($productLink);
-        var_dump("tracking".$this->productInfo['price']);
-        array_push($resProducts, $productInfo);
-        if ($productInfo['price'] != $this->product->price) {
-            // Add product history
-            $productHistory = new ProductHistories;
 
-            $productHistory->product_id = $this->product->id;
-            $productHistory->price = $this->product->price;
-            $productHistory->created_at = $this->product->created_at;
+        DB::beginTransaction();
+            try {
+                if ($productInfo['price'] != $this->product->actual_price) {
+                    // Add product history
+                    $productHistory = new ProductHistories;
+        
+                    $productHistory->product_id = $this->product->id;
+                    $productHistory->price = $this->product->actual_price;
+                    $productHistory->created_at = $this->product->created_at;
+        
+                    $productHistory->save();
+        
+                    // Update product price
+                    $this->product->actual_price = $productInfo['price'];
+                    $this->product->old_price = $productInfo['price_max'];
+                    $this->product->discount = $productInfo['discount'];
+                    $this->product->inventory_status = $productInfo['inventory_status'];
+        
+                    $this->product->save();
 
-            $productHistory->save();
+                    // Send Mail
+                    // var_dump("send mail");
+                    Mail::to("quang123@yopmail.com")->send(new TriggerMail($this->product, $productHistory->price));
+                    echo "Email has been sent.".$productInfo['price'];
+                }
 
-            // Update product price
-            $this->product->actual_price = $productInfo['price'];
-            $this->product->old_price = $productInfo['price_max'];
-            $this->product->discount = $productInfo['discount'];
-            $this->product->inventory_status = $productInfo['inventory_status'];
-            $this->product->price = $productInfo['price'];
+                DB::commit();
 
-            $this->product->save();
-
-            // Send Mail
-            var_dump("send mail");
-        }
-                
-                
+            } catch (\Exception $th) {
+                DB::rollBack();
+                echo $th;
+            }               
     }
 }

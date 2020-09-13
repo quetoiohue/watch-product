@@ -154,19 +154,10 @@ class ProductsController extends Controller {
 
     public function trackingPrice() {
         $products = Products::all();
-        $resProducts = array();
         foreach ($products as $product) {
-            DB::beginTransaction();
-            try {
-                TriggerProduct::dispatch($product);
-
-                DB::commit();
-            } catch (\Exception $th) {
-                DB::rollBack();
-                $this->responseServerError(500);
-            }
-            // return $this->responseSuccess(200, $resProducts);
+            TriggerProduct::dispatch($product);
         }
+        return $this->responseSuccess(200, []);
     }
     
 }
