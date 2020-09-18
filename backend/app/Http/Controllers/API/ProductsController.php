@@ -121,8 +121,8 @@ class ProductsController extends Controller {
                 'product_id' => $product->id,
                 'alert_type_id' => $alertType['id']
             ])->first();
-
-            if ($alertType['value'] && !$productAlertType->status || !$productAlertType) {
+            // decrement point
+            if ($productAlertType && $alertType['value'] && !$productAlertType->status) {
                 
                 if ($user->total_point < $defaultAlertType->point_charge) {
                     return $this->responseBadRequest(400, "Not enough point");
@@ -151,13 +151,31 @@ class ProductsController extends Controller {
             return $this->responseBadRequest(400, "Product not found");
         }
     }
-
-    public function trackingPrice() {
-        $products = Products::all();
-        foreach ($products as $product) {
-            TriggerProduct::dispatch($product);
-        }
-        return $this->responseSuccess(200, []);
-    }
     
+    public function productCrawlerForGuest(Request $request) {
+        $validatedData = Validator::make($request->all(), [
+            'links' => 'required',
+        ]);
+
+        if($validatedData->fails()) {
+            return $this->responseBadRequest("links field is required.", 400);
+        }
+
+        if(count($request->links) > 5) {
+            return $this->responseBadRequest("You need login to add more.");
+        }
+
+        $productLinks = $request->links;
+        $productsInfo = array();
+
+        foreach ($productLinks as $productLink) {
+            $productInfo = $this->getProductInfoByLink($productLink);
+            
+            if ($productInfo) {
+                array_push($productsInfo, $productInfo);
+            }
+        }
+
+        return $this->responseSuccess(200, $productsInfo);
+    }
 }

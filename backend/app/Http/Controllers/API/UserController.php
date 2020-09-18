@@ -16,9 +16,11 @@ class UserController extends Controller {
 
     public function whoami() {
         $user = Auth::user();
-        $user->products;
-        $user->productAlerts;
-
+        $user->products = $user->products()->with(['productAlerts' => 
+        function ($query) {
+            $query->where('product_id', 51);
+        }
+        ])->get();
         return $this->responseSuccess(200, $user);
     }
 
@@ -36,5 +38,16 @@ class UserController extends Controller {
         } catch (\Exception $e) {
             return $this->responseServerError(500);
         }
+    }
+
+    public function stripePayment() {
+        $stripe = new \Stripe\StripeClient('sk_test_51HRJojEAHL6zqfBygevYRzTLfKMR3cyoR2GiS2paSdKjZvYFiN5IPqHOlL8h8hnX4bPRvLXBLS0u1rwTTU5BgbRr00sX2r5HS2');
+        $customer = $stripe->customers->create([
+            'description' => 'example customer',
+            'email' => 'email@example.com',
+            'payment_method' => 'pm_card_visa',
+        ]);
+        echo $customer;
+        return $this->responseSuccess(200, $customer);
     }
 }
