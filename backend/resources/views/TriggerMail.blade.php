@@ -12,7 +12,10 @@
        <span>Product name: </span>  {{ $product->name }}
     </p>
     <p class="bio">
-        <span>Price change: </span> from {{ $product->actual_price }}{{ $product->currency }} to {{ $product->lastCheckedPrice}}{{ $product->currency }}
+        <span>Price change: </span> from <span class="price"> {{ $product->actual_price }} {{ $product->currency }} </span>  to <span class="price"> {{ $product->lastCheckedPrice}} {{ $product->currency }} </span> 
+    </p>
+    <p class="bio">
+        <span>Discount: </span> {{ $product->discount }}
     </p>
     <div class="bio">
         <a href={{ $product->link }} class="btn-link">
@@ -30,6 +33,10 @@
         text-align: left;
         font-weight: 500;
         font-size: 16px;
+    }
+    .bio .price {
+        color: blue;
+        font-weight: 600;
     }
     .btn-link {
         display: inline-block;

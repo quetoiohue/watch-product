@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\TriggerProduct;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class RunTriggerProductTask extends Command
 {
@@ -38,5 +40,10 @@ class RunTriggerProductTask extends Command
     public function handle()
     {
         echo "Running task";
+        $products = DB::table('products')->get();
+
+        foreach($products as $product) {
+            TriggerProduct::dispatch($product);
+        }
     }
 }
