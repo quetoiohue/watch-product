@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ProductAlertsSeeder::class,
             AlertTypesSeeder::class,
             PackageTypesSeeder::class,
+            PaymentMethodSeeder::class,
         ]);
     }
 }

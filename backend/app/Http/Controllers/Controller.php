@@ -18,10 +18,10 @@ class Controller extends BaseController
         ], 400);
     }
 
-    public function responseServerError($code) {
+    public function responseServerError($code, $msg = "Internal server is error.") {
         return response()->json([
             'status' => false,
-            'message' => "Internal server is error.",
+            'message' => $msg,
             'code' => $code
         ], 500);
     }
