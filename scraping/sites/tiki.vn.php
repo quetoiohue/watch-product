@@ -37,15 +37,15 @@ function getProductByURL($product_url) {
     if (array_key_exists("configurable_products", $product_item)) {
         $product->imageURL = $product_item["configurable_products"][0]["images"][0]["large_url"];
     }
-    if (!empty($spid_product)) {
-        foreach($product_item["configurable_products"] as $item) {
-            if ($item["id"] == $spid_product) {
-                $product->title = $item["name"];
-                $product->price = $item["price"];
-                $product->imageURL = $item["images"][0]["large_url"];
-            }
-        }
-    }
+    // if (!empty($spid_product)) {
+    //     foreach($product_item["configurable_products"] as $item) {
+    //         if ($item["id"] == $spid_product) {
+    //             $product->title = $item["name"];
+    //             $product->price = $item["price"];
+    //             $product->imageURL = $item["images"][0]["large_url"];
+    //         }
+    //     }
+    // }
 
     return json_encode($product);
 }

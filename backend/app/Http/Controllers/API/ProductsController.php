@@ -6,18 +6,12 @@ use App\AlertTypes;
 use App\Http\Controllers\Controller;
 use App\Products;
 use App\ProductAlerts;
-use App\ProductHistories;
-use App\TypeAlerts;
-use App\User;
-use App\Jobs\TriggerProduct;
-
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
-use stdClass;
 
 class ProductsController extends Controller {
 
@@ -29,8 +23,8 @@ class ProductsController extends Controller {
     public function index($userId) {
         // $user = Auth::user();
         
-        $products = Products::where('user_id', $userId)->get();
-
+        $products = Products::where('user_id', $userId)->with(['productAlerts'])->get();
+        
         return $this->responseSuccess(200, $products);
     }
 
@@ -63,8 +57,9 @@ class ProductsController extends Controller {
                         'discount' => $productInfo['discount'],
                         'inventory_status' => $productInfo['inventory_status'],
                     ]
-                    );
-
+                    )->first();
+                
+                $newProduct->productAlerts;
                 array_push($productsInfo, $newProduct);
             }
         }
@@ -72,15 +67,15 @@ class ProductsController extends Controller {
         return $this->responseSuccess(200, $productsInfo);
     }
 
-    public function getProductInfoByLink($productLink) {
-        try {
-            $url = env('SCRAPING_URL').'?product_url='.$productLink; 
-            $scrapingRequest = $this->client->get($url);
-            $scrapingResponse = json_decode($scrapingRequest->getBody()->getContents(), true);
+    public function getProductInfoByLink($productLink, $retry = 1) {
+        $url = env('SCRAPING_URL').'?product_url='.$productLink; 
+        $scrapingRequest = $this->client->get($url);
+        $scrapingResponse = json_decode($scrapingRequest->getBody()->getContents(), true);
+
+        if ($retry < 4 && !$scrapingResponse['price_max']) {
+            return $this->getProductInfoByLink($productLink, $retry+1);
+        } else {
             return $scrapingResponse;
-        } catch (\Exception $th) {
-            $response = new stdClass();
-            return $response;
         }
     }
 

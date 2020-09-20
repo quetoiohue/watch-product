@@ -12,6 +12,7 @@
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.18.35",
+        "laravel/nexmo-notification-channel": "^2.4",
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "stripe/stripe-php": "^7.52"

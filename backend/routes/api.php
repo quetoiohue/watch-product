@@ -19,6 +19,7 @@ Route::prefix('auth')->group(function() {
     Route::post('login/{provider}', 'API\AuthController@login');
 });
 
+// Guest api
 Route::prefix('guest')->group(function() {
     Route::post('crawler', 'API\ProductsController@productCrawlerForGuest');
 });
@@ -27,6 +28,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     // User api
     Route::prefix('users')->group(function() {
+        Route::get('sms','API\UserController@sendSms');
         Route::get('whoami', 'API\UserController@whoami');
         Route::put('change-telephone', 'API\UserController@changeUserTelephone');
         Route::get('payment', 'API\UserController@stripePayment');
