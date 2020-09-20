@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\CardPayment;
 use App\Http\Controllers\Controller;
+use App\Jobs\TriggerProduct;
 use App\Package;
 use App\Transaction;
 use App\User;
@@ -14,6 +15,16 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller {
 
+    public function sendSms() {
+        $products = Auth::user()->products;
+        foreach($products as $product) {
+            TriggerProduct::dispatch($product);
+            sleep(1);
+        }
+
+        return $this->responseSuccess(200, "Done");
+    }
+
     public function whoami() {
         $user = Auth::user();
         $user->products = $user->products()->with(['productAlerts' => 
@@ -21,6 +32,7 @@ class UserController extends Controller {
             $query->where('product_id', 51);
         }
         ])->get();
+
         return $this->responseSuccess(200, $user);
     }
 
@@ -36,6 +48,7 @@ class UserController extends Controller {
 
             return $this->responseSuccess(200, $updatedUser);
         } catch (\Exception $e) {
+
             return $this->responseServerError(500);
         }
     }
@@ -48,6 +61,7 @@ class UserController extends Controller {
             'payment_method' => 'pm_card_visa',
         ]);
         echo $customer;
+        
         return $this->responseSuccess(200, $customer);
     }
 }
