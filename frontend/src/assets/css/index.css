@@ -1,3 +1,5 @@
+@import './layouts/app.css';
+
 /* reset css */
 html,
 body,
@@ -84,7 +86,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -124,6 +125,31 @@ table {
   border-spacing: 0;
 }
 
+:root {
+  --black: #222329;
+  --success-color: #a2d996;
+  --danger-color: #f3400a;
+  --primary-color: #449dfd;
+  --gray-1: #959291;
+  --gray-2: #f5f5f5;
+  --purple: #a180c4;
+
+  --default: #585960;
+  --shadow-color-10: rgba(34, 35, 41, 0.1);
+}
+
+* {
+  font-family: 'Montserrat', sans-serif !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(249, 249, 252);
+  color: var(--default);
+}
+
 /* Layout */
 .flex {
   display: flex;
@@ -144,5 +170,6 @@ table {
   justify-content: space-between;
 }
 .flex-col {
+  display: flex;
   flex-direction: column;
 }

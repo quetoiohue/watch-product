@@ -1,13 +1,26 @@
 import React from 'react'
 import { Container } from '@material-ui/core'
+import styled from 'styled-components'
 
-const public = () => {
+import SimpleHeader from '../components/core/SimpleHeader'
+
+const MainContent = styled.main`
+  padding: 80px;
+  /* background-image: url('');
+  background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; */
+`
+
+const PublicLayout = ({ children }) => {
   return (
-    <div className="public-layout flex">
+    <div className="public-layout flex-col mh-100v">
       <SimpleHeader className="flex-none flex" />
-      <main className="main-layout"></main>
+      <MainContent className="main-layout flex-1">
+        <Container>{children}</Container>
+      </MainContent>
     </div>
   )
 }
 
-export default public
+export default PublicLayout
