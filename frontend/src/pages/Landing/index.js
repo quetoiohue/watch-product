@@ -2,10 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 import { Button, Input, Typography } from '@material-ui/core'
 
-import DemoTable from './landings/DemoTable'
-import FormAddTempProduct from './landings/FormAddTempProduct'
+import DemoTable from './DemoTable'
+import FormAddTempProduct from './FormAddTempProduct'
 
 const Landing = () => {
+  const [products, setProducts] = React.useState([])
+
+  React.useEffect(() => {
+    return () => {
+      const links = products.map((_p) => _p.link)
+      console.log('links', products, links)
+
+      localStorage.setItem('links', JSON.stringify(links))
+    }
+  }, [products])
+
+  const handleAddProduct = (newProduct) => {
+    setProducts([...products, newProduct])
+  }
+
   return (
     <LandingContainer>
       <section className="text-center">
@@ -18,10 +33,10 @@ const Landing = () => {
           consectetur, neque doloribus, cupiditate numquam dignissimos laborum
           fugiat deleniti? Eum quasi quidem quibusdam.
         </Typography>
-        <FormAddTempProduct />
+        <FormAddTempProduct products={products} addProduct={handleAddProduct} />
       </section>
       <section className="table-container">
-        <DemoTable />
+        <DemoTable products={products} />
       </section>
     </LandingContainer>
   )

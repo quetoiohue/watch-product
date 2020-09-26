@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import ButtonLink from './ButtonLink'
 
 const LogoIcon = styled.p`
   font-size: 24px;
@@ -13,9 +15,11 @@ const LogoIcon = styled.p`
 const Logo = () => {
   return (
     <React.Fragment>
-      <LogoIcon>
-        Deal <span>Hunter</span>
-      </LogoIcon>
+      <ButtonLink to="/">
+        <LogoIcon>
+          Deal <span>Hunter</span>
+        </LogoIcon>
+      </ButtonLink>
     </React.Fragment>
   )
 }

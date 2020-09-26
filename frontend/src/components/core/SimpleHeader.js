@@ -1,8 +1,9 @@
+import { Container } from '@material-ui/core'
 import React from 'react'
-import { Button, Container } from '@material-ui/core'
+import ButtonSubmit from './ButtonSubmit'
 import Logo from './Logo'
 
-const SimpleHeader = () => {
+const SimpleHeader = (props) => {
   return (
     <div className="flex-none">
       <Container className="py-2">
@@ -12,7 +13,7 @@ const SimpleHeader = () => {
           </div>
           <div className="nav-spacing flex-1" />
           <div className="nav-btn flex-none">
-            <Button>Login</Button>
+            <ButtonSubmit onClick={props.openLoginModal}>Login</ButtonSubmit>
           </div>
         </div>
       </Container>
