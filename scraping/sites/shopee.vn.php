@@ -29,6 +29,8 @@ function getProductByURL($product_url) {
     $product->price_max = $product_item["price_max"] / 100000;
     $product->currency = $product_item["currency"];
     $product->imageURL = get_url_image($product_item["image"]);
+    $product->discount = $product_item["raw_discount"];
+    $product->inventory_status = $product_item["stock"] ? "available" : "sold out";
 
     return json_encode($product);
 }
