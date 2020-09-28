@@ -27,11 +27,7 @@ class UserController extends Controller {
 
     public function whoami() {
         $user = Auth::user();
-        $user->products = $user->products()->with(['productAlerts' => 
-        function ($query) {
-            $query->where('product_id', 51);
-        }
-        ])->get();
+        $user->products = $user->products()->with(['productAlerts', 'productHistories'])->get();
 
         return $this->responseSuccess(200, $user);
     }

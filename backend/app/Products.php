@@ -21,6 +21,8 @@ class Products extends Model
     "inventory_status"
 ];
 
+  protected $appends = ['cheapest_price', 'initial_price'];
+
   public function user() {
     return $this->belongsTo('App\User', 'user_id');
   }
@@ -31,5 +33,33 @@ class Products extends Model
 
   public function productAlerts() {
     return $this->hasMany('App\ProductAlerts', 'product_id', 'id');
+  }
+
+  public function getCurrentPriceAttribute()
+  {
+    $currentPrice = $this->attributes['actual_price'];
+    return $currentPrice;
+  }
+
+  public function getCheapestPriceAttribute()
+  {
+    $cheapestPrice = $this->productHistories()->min('price');
+
+    if (!$cheapestPrice) {
+      return $this->getCurrentPriceAttribute();
+    }
+    return $cheapestPrice < $this->getCurrentPriceAttribute() 
+    ? $cheapestPrice : $this->getCurrentPriceAttribute();
+  }
+
+  public function getInitialPriceAttribute()
+  {
+    $initialId = $this->productHistories()->min('id');
+
+    if (!$initialId) {
+      return $this->getCurrentPriceAttribute();
+    }
+    $initialPrice = $this->productHistories()->select('price')->where('id', $initialId)->first();
+    return $initialPrice['price'];
   }
 }
