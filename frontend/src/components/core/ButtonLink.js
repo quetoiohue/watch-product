@@ -11,6 +11,7 @@ const ButtonLink = ({ to, children, ...props }) => {
 
     history.push(to)
   }
+
   return (
     <ButtonLinkInner
       {...props}
@@ -27,5 +28,7 @@ export default ButtonLink
 const ButtonLinkInner = styled(Button)`
   &.non-bg {
     background: none;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 `

@@ -24,11 +24,7 @@ const BasicModal = ({ isOpen, close, title, children }) => {
             >
               {title}
             </div>
-            <IconButton
-              onClick={close}
-              aria-label="delete"
-              className="modal__header--btn"
-            >
+            <IconButton onClick={close} className="modal__header--btn">
               <Close />
             </IconButton>
           </header>

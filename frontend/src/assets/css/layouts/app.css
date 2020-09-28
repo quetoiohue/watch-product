@@ -106,6 +106,10 @@
 }
 
 /* Padding */
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -115,9 +119,46 @@
   padding-bottom: 1rem;
 }
 
+/* margin */
+.mt-5 {
+  margin-top: 20px;
+}
 /* layout */
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
 .mh-100v {
   min-height: 100vh;
+}
+
+/* Layout - flex*/
+.flex {
+  display: flex;
+}
+.flex-none {
+  flex: none;
+}
+.flex-1 {
+  flex: 1;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .invisibility {
@@ -126,4 +167,19 @@
 /* Colors */
 .text-primary {
   color: var(--primary-color);
+}
+.text-danger {
+  color: var(--danger-color);
+}
+.text-warning {
+  color: var(--warning-color);
+}
+.text-success {
+  color: var(--success-color);
+}
+.text-default {
+  color: var(--default);
+}
+.text-dark {
+  color: var(--black);
 }

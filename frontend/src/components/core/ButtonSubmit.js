@@ -14,8 +14,10 @@ const ButtonSubmit = ({ isWorking, children, ...props }) => {
 export default ButtonSubmit
 
 const ButtonSubmitInner = styled(Button)`
-  height: 34px;
-  border-radius: 17px;
+  &.MuiButton-root {
+    height: 34px;
+    border-radius: 17px;
+  }
 
   .isWorking {
     position: absolute;
