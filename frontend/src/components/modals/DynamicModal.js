@@ -23,15 +23,14 @@ const DynamicModal = () => {
     }
   }
 
-  const handleClose = () => {
+  const handleConfirm = () => {
     console.log('close')
-    dispatch(hideModal())
+    window.modalDeferred.resolve()
   }
 
   return (
     <ModalContainer
       open={!!modal}
-      onClose={handleClose}
       closeAfterTransition
       BackdropProps={{
         timeout: 500,
@@ -41,7 +40,7 @@ const DynamicModal = () => {
         <div className="modal__container">
           <header className="modal__header">
             <IconButton
-              onClick={handleClose}
+              onClick={handleConfirm}
               aria-label="delete"
               className="modal__header--btn"
             >

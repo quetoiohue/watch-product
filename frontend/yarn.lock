@@ -3811,6 +3811,11 @@ default-gateway@^4.2.0:
     execa "^1.0.0"
     ip-regex "^2.1.0"
 
+defer-promise@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/defer-promise/-/defer-promise-2.0.1.tgz#7e6c67a55a17a9a7079fbd524cf2c1dadae3590b"
+  integrity sha512-zoKtBNZZQSv+45zx6Bjx5+N2DSloiTlTdAZt7COAG103Ulesn2I5GHG2nBcl/uKGp6atDWa/6Z99cfTCzPNopg==
+
 define-properties@^1.1.2, define-properties@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.3.tgz#cf88da6cbee26fe6db7094f61d870cbd84cee9f1"
