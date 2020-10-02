@@ -123,8 +123,7 @@ class ProductsController extends Controller {
                     return $this->responseBadRequest(400, "Not enough point");
                 }
 
-                $user->total_point = $user->total_point - $defaultAlertType->point_charge;
-                $user->save();
+                $user->decrement('total_point', $defaultAlertType->point_charge);
             }
 
             ProductAlerts::updateOrInsert([
@@ -134,6 +133,7 @@ class ProductsController extends Controller {
         }
 
         $product->productAlerts;
+        $product->productHistories;
         return $this->responseSuccess(200, $product);
     }
 

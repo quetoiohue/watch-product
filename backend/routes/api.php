@@ -47,6 +47,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::prefix('transaction')->group(function() {
         Route::post('/stripePayment', 'API\TransactionController@stripePayment');
     });
+
+    // Package types 
+    Route::prefix('package-types')->group(function() {
+        Route::get('/', 'API\PackageTypesController@index');
+    });
 });
 
 
