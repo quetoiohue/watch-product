@@ -44,7 +44,11 @@ export default function ProductTable(props) {
           </TableCell>
           <TableCell align="center" className="product__alerts">
             {row.product_alerts.map((_alert) => {
-              return <div key={_alert.alert_type_id}>{getAlert(_alert)}</div>
+              return (
+                !!_alert.status && (
+                  <div key={_alert.alert_type_id}>{getAlert(_alert)}</div>
+                )
+              )
             })}
           </TableCell>
           <TableCell align="right">

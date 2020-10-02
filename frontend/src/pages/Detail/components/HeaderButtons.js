@@ -17,24 +17,25 @@ const HeaderButtons = () => {
     try {
       await httpDelete(`/products/${editingProduct.id}`)
 
-      await dispatch(deleteProduct(editingProduct))
+      dispatch(deleteProduct(editingProduct))
 
-      await dispatch(
-        displayModal('success-modal', {
-          text: `Product ${editingProduct.id} has been deleted.`,
-        })
-      )
+      const isConfirmed = await displayModal('success-modal', {
+        text: `Product ${editingProduct.id} has been deleted.`,
+      })
 
-      await history.push('/')
+      if (isConfirmed !== null) {
+        history.push('/')
+      }
     } catch (error) {
-      await dispatch(
-        displayModal('error-modal', {
-          text: `There's something wrong.`,
-        })
-      )
+      await displayModal('error-modal', {
+        text: `There's something wrong.`,
+      })
     }
   }
 
+  const handleManageAlerts = () => {
+    history.push(`/products/${editingProduct.id}/alerts`)
+  }
   return (
     <>
       <Toolbar className="items-center justify-end">
@@ -43,6 +44,7 @@ const HeaderButtons = () => {
           variant="contained"
           endIcon={<NotificationsNone />}
           className="toolbar-btn"
+          onClick={handleManageAlerts}
         >
           Manage Alerts
         </ButtonSubmit>

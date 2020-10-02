@@ -12,3 +12,13 @@ export const getAlert = (productAlert) => {
       return ''
   }
 }
+
+export const getAlertValue = (alerts, alertId) => {
+  const alertItem = alerts?.find((_alert) => _alert.alert_type_id === alertId)
+
+  if (!alertItem) {
+    return false
+  }
+
+  return !!alertItem.status
+}

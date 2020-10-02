@@ -32,7 +32,7 @@ const AuthLayout = ({ children }) => {
         console.log(error)
 
         localStorage.removeItem('authToken')
-        history.push('/landing')
+        window.location.href = '/landing'
       }
     }
 

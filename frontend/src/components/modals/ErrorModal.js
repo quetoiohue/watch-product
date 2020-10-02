@@ -32,7 +32,7 @@ const ErrorModalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 12px 40px;
     color: rgb(97, 26, 21);
     background-color: rgb(253, 236, 234);
 
