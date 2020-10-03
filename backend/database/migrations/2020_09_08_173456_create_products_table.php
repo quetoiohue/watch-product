@@ -26,8 +26,9 @@ class CreateProductsTable extends Migration
             $table->double('old_price');
             $table->double('actual_price');
             $table->double('discount');
-            $table->bigInteger('quantity')->unsigned();
-
+            $table->string('inventory_status')->default('available')->nullable();
+            $table->string('currency')->default('VND');
+            
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });

@@ -19,13 +19,12 @@ class CreateTransactionTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->string('card_id');
-
+            $table->string('payment_token');
+            $table->string('card_type');
+            $table->string('card_brand');
+            
             $table->bigInteger('package_type_id')->unsigned();
             $table->foreign('package_type_id')->references('id')->on('package_types');
-
-            $table->bigInteger('payment_method_id')->unsigned();
-            $table->foreign('payment_method_id')->references('id')->on('payment_method');
 
             $table->string('description');
 

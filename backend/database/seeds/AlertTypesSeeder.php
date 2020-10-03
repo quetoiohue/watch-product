@@ -14,18 +14,18 @@ class AlertTypesSeeder extends Seeder
     {
         //
         DB::table('alert_types')->insert([
-            'point_charge' => 0,
+            'point_charge' => 1,
             'name' => 'email',
         ]);
 
         DB::table('alert_types')->insert([
             'point_charge' => 1,
-            'name' => 'phone call',
+            'name' => 'sms',
         ]);
 
         DB::table('alert_types')->insert([
             'point_charge' => 1,
-            'name' => 'sms',
+            'name' => 'phone call',
         ]);
     }
 }
