@@ -58,7 +58,8 @@ class ProductsController extends Controller {
                         'inventory_status' => $productInfo['inventory_status'],
                     ]
                     )->first();
-                
+
+                $newProduct->productHistories;
                 $newProduct->productAlerts;
                 array_push($productsInfo, $newProduct);
             }
@@ -117,7 +118,7 @@ class ProductsController extends Controller {
                 'alert_type_id' => $alertType['id']
             ])->first();
             // decrement point
-            if ($productAlertType && $alertType['value'] && !$productAlertType->status) {
+            if (!$productAlertType || $alertType['value'] && !$productAlertType->status) {
                 
                 if ($user->total_point < $defaultAlertType->point_charge) {
                     return $this->responseBadRequest(400, "Not enough point");

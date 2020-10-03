@@ -9,12 +9,8 @@ class Transaction extends Model
     //
     protected $table = 'transaction';
     
-    protected $fillable = ['id', 'user_id', 'card_id', 'package_type_id',
-     'payment_method_id', 'description', 'created_at'];
-
-    public function paymentMethod() {
-        return $this->hasOne('App\PaymentMethod');
-    }
+    protected $fillable = ['id', 'user_id', 'package_type_id',
+    'card_type', 'card_brand', 'description', 'created_at'];
 
     public function owner() {
         return $this->belongsTo('App\User');

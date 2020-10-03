@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\PackageTypes;
-use App\PaymentMethod;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,62 +40,44 @@ class TransactionController extends Controller
     public function stripePayment(Request $request)
     {
         $validatedData = Validator::make($request->all(), [
-            // 'card_id' => 'required',
-            'package_type_id' => 'required',
-            'payment_method_id' => 'required'
+            'token' => 'required',
+            'package_type_id' => 'required'
         ]);
 
         if ($validatedData->fails()) {
             return $this->responseBadRequest(400);
         }
 
+        $token = $request->token;
+        $packageTypeId = $request->package_type_id;
         $user = Auth::user();
-        $packageType = PackageTypes::find($request->package_type_id);
-        $paymentMethod = PaymentMethod::find($request->payment_method_id);
-
+        $packageType = PackageTypes::find($packageTypeId);
+        
         $stripe = new \Stripe\StripeClient(
-            env('PUBLIC_STRIPE_KEY')
+            env('SECRET_STRIPE_KEY')
         );
 
         try {
-            // create Token
-            $paymentToken =  $stripe->tokens->create([
-                'card' => [
-                'number' => '4242424242424242',
-                'exp_month' => 9,
-                'exp_year' => 2021,
-                'cvc' => '314',
-                ],
-            ]);
-            
-            // create customer
-            $customer = $stripe->customers->create([
-                'email' => $user->email,
-                'description' => 'My First Test Customer (created for API docs)',
-                'source' => $paymentToken->id
-              ]);
-
-            echo is_integer($packageType->amount);
             // create charge
-            $charge = $stripe->charges->create([
+            $stripe->charges->create([
                 'amount' => $packageType->amount * 100, // Unit: cents
                 'currency' => $packageType->currency,
-                'customer' => $customer->id,
-                'source' => $customer->default_source,
-                'description' => 'Test payment',
+                'source' => $token['id'],
+                'description' => 'Purchase ' . ' package '. $packageType->name,
             ]);
             
             $transaction = new Transaction;
 
             $transaction->user_id = $user->id;
-            $transaction->card_id = $customer->id;
-            $transaction->package_type_id = $packageType->id;
-            $transaction->payment_method_id = $paymentMethod->id;
-            $transaction->description = '';
+            $transaction->payment_token = $token['id'];
+            $transaction->card_type = $token['type'];
+            $transaction->card_brand = $token['card']['brand'];
+            $transaction->package_type_id = $packageTypeId;
+            $transaction->description = 'Purchase ' . ' package ' . $packageType->name;
 
             $transaction->save();
             // return response 
-            return $this->responseSuccess(200, $transaction);
+            return $this->responseSuccess(200, "Make payment successfully.");
 
         } catch(\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught
