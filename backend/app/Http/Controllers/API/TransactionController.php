@@ -76,6 +76,9 @@ class TransactionController extends Controller
             $transaction->description = 'Purchase ' . ' package ' . $packageType->name;
 
             $transaction->save();
+
+            $user->increment('total_point', $packageType->points);
+            
             // return response 
             return $this->responseSuccess(200, "Make payment successfully.");
 
