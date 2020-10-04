@@ -39,11 +39,7 @@ const DynamicModal = () => {
       <Fade in={!!modal}>
         <div className="modal__container">
           <header className="modal__header">
-            <IconButton
-              onClick={handleConfirm}
-              aria-label="delete"
-              className="modal__header--btn"
-            >
+            <IconButton onClick={handleConfirm} className="modal__header--btn">
               <Close />
             </IconButton>
           </header>

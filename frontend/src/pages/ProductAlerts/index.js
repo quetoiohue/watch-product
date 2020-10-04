@@ -1,15 +1,15 @@
-import { Paper } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import BasicPaper from '../../components/core/BasicPaper'
 import { EMAIL, SMS } from '../../constants'
 import { getAlertValue } from '../../helpers'
 import AlertBoard from './components/AlertBoard'
 import FooterButtons from './components/FooterButtons'
-import HeaderBar from './components/HeaderBar'
 
 const ProductAlerts = () => {
-  const { editingProduct } = useSelector((state) => state.user)
+  const { user, editingProduct } = useSelector((state) => state.user)
+  const { total_point } = user || {}
   const [alerts, setAlerts] = React.useState({
     email: false,
     sms: false,
@@ -38,10 +38,27 @@ const ProductAlerts = () => {
     }))
   }
 
+  const headerBar = (
+    <>
+      <span className="title">Types of alerts</span>
+      <div className="user__point">
+        Available points:{' '}
+        <span className="text-primary font-medium"> {total_point} </span>
+      </div>
+    </>
+  )
+
   return (
     <ProductAlertsContainer>
-      <HeaderBar />
-      <AlertBoard alerts={alerts} onChangeAlertStatus={onChangeAlertStatus} />
+      <BasicPaper
+        headerBar={headerBar}
+        mainContent={
+          <AlertBoard
+            alerts={alerts}
+            onChangeAlertStatus={onChangeAlertStatus}
+          />
+        }
+      />
       <FooterButtons alerts={alerts} />
     </ProductAlertsContainer>
   )
@@ -49,17 +66,7 @@ const ProductAlerts = () => {
 
 export default ProductAlerts
 
-const ProductAlertsContainer = styled(Paper)`
-  .header__bar {
-    padding: 20px;
-    border-bottom: 1px solid var(--gray-2);
-
-    .title {
-      font-size: 18px;
-      font-weight: 500;
-    }
-  }
-
+const ProductAlertsContainer = styled.div`
   .alert__board {
     border-bottom: 1px solid var(--gray-2);
     padding: 24px 20px;

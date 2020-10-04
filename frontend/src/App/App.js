@@ -13,18 +13,16 @@ const newTheme = createMuiTheme(theme)
 
 function App() {
   return (
-    <React.StrictMode>
-      <Provider store={store}>
-        <ThemeProvider theme={newTheme}>
-          <Suspense fallback={() => <div>Loading...</div>}>
-            <BrowserRouter>
-              <Routes />
-              <DynamicModal />
-            </BrowserRouter>
-          </Suspense>
-        </ThemeProvider>
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <ThemeProvider theme={newTheme}>
+        <Suspense fallback={() => <div>Loading...</div>}>
+          <BrowserRouter>
+            <Routes />
+            <DynamicModal />
+          </BrowserRouter>
+        </Suspense>
+      </ThemeProvider>
+    </Provider>
   )
 }
 

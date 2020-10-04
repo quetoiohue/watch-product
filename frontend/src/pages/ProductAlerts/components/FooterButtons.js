@@ -46,7 +46,7 @@ const FooterButtons = ({ alerts }) => {
       history.push('/')
     } catch (error) {
       await displayModal('error-modal', {
-        text: 'Your point is not enough to made change.',
+        text: 'Your point is not enough to make change.',
       })
       history.push('/checkout')
     } finally {

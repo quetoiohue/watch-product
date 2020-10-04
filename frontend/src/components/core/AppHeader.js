@@ -4,14 +4,19 @@ import {
   NotificationsNone,
   AccountCircle,
 } from '@material-ui/icons'
+import { useHistory } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 import ButtonSubmit from './ButtonSubmit'
 import LightLogo from './LightLogo'
 
 const AppHeader = (props) => {
+  const history = useHistory()
   const container = React.useRef(null)
 
+  const onClickSetting = () => {
+    history.push('/setting')
+  }
   return (
     <AppHeaderContainer className="flex-none">
       <Container className="py-2">
@@ -27,7 +32,7 @@ const AppHeader = (props) => {
             <IconButton>
               <NotificationsNone />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={onClickSetting}>
               <AccountCircle />
             </IconButton>
           </div>

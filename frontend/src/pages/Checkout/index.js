@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { httpGet } from '../../helpers/http'
 import PackageCard from './components/PackageCard'
+import BasicPaper from '../../components/core/BasicPaper'
 
 const Checkout = () => {
   const [packageTypes, setPackageTypes] = React.useState([])
@@ -19,34 +20,32 @@ const Checkout = () => {
   }, [])
 
   console.log(packageTypes)
+
+  const headerBar = (
+    <>
+      <span className="title">Price</span>
+      <div />
+    </>
+  )
+
+  const mainContent = (
+    <div className="flex items-center justify-center">
+      {packageTypes.map((_package) => (
+        <PackageCard key={_package.id} packageType={_package} />
+      ))}
+    </div>
+  )
+
   return (
     <CheckoutContainer>
-      <div className="header__bar flex justify-between items-center">
-        <span className="title">Price</span>
-        <div />
-      </div>
-      <div className="content__container flex items-start justify-between">
-        {packageTypes.map((_package) => (
-          <PackageCard key={_package.id} packageType={_package} />
-        ))}
-      </div>
+      <BasicPaper headerBar={headerBar} mainContent={mainContent} />
     </CheckoutContainer>
   )
 }
 
 export default Checkout
 
-const CheckoutContainer = styled(Paper)`
-  .header__bar {
-    padding: 20px;
-    border-bottom: 1px solid var(--gray-2);
-
-    .title {
-      font-size: 18px;
-      font-weight: 500;
-    }
-  }
-
+const CheckoutContainer = styled.div`
   .content__container {
     padding: 40px 20px;
 

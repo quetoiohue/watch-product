@@ -8,7 +8,7 @@ const ErrorModal = ({ text }) => {
       <div className="error__modal--title">Oh! Snap</div>
       <div className="error__modal--body">
         <ErrorOutline className="error__modal--icon" />
-        <p>{text}</p>
+        <p className="leading-4">{text}</p>
       </div>
     </ErrorModalContainer>
   )

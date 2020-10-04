@@ -8,7 +8,7 @@ const SuccessModal = ({ text }) => {
       <div className="error__modal--title">Confirmation</div>
       <div className="error__modal--body">
         <Check className="error__modal--icon" />
-        <p>{text}</p>
+        <p className="leading-4">{text}</p>
       </div>
     </SuccessModalContainer>
   )
@@ -32,7 +32,7 @@ const SuccessModalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 12px 40px;
     color: rgb(30, 70, 32);
     background-color: rgb(237, 247, 237);
 

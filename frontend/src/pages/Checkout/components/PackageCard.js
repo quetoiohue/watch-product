@@ -1,27 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
 import ButtonSubmit from '../../../components/core/ButtonSubmit'
+import Modal from '../../../components/core/Modal'
+import PackagePayment from './PackagePayment'
 
 const PackageCard = ({ packageType }) => {
   const { id, amount, points, currency } = packageType
+  const [openPayment, setOpenPayment] = React.useState(false)
 
   return (
     <PackageCardContainer className="card__container">
-      <div className="sign">
+      <div className="package__sign">
         <div className={`package-point package-point--${id}`}>{amount}</div>
       </div>
-      <div className="price">{`${amount} ${currency}`}</div>
-      <div className="point">{points} points</div>
-      <div className="description">
+      <div className="package__price">{`${amount} ${currency}`}</div>
+      <div className="package__point">{points} points</div>
+      <div className="package__description">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
         blanditiis tenetur unde suscipit.
       </div>
       <ButtonSubmit
         variant="contained"
         className={`submit__button submit__button--${id}`}
+        onClick={() => setOpenPayment(true)}
       >
         Purchase
       </ButtonSubmit>
+      <Modal
+        isOpen={openPayment}
+        close={() => setOpenPayment(false)}
+        title="Purchase"
+      >
+        <PackagePayment
+          packageType={packageType}
+          finish={() => setOpenPayment(false)}
+        />
+      </Modal>
     </PackageCardContainer>
   )
 }
@@ -32,8 +46,9 @@ const PackageCardContainer = styled.div`
   text-align: center;
   padding: 20px;
   border-right: 1px solid var(--gray-2);
+  color: var(--default);
 
-  .sign {
+  .package__sign {
     width: 150px;
     line-height: 150px;
     border-radius: 50%;
@@ -56,17 +71,18 @@ const PackageCardContainer = styled.div`
     }
   }
 
-  .price {
+  .package__price {
     margin-bottom: 8px;
     font-size: 20px;
     font-weight: 500;
   }
-  .point {
+  .package__point {
     margin-bottom: 16px;
     font-size: 14px;
   }
-  .description {
-    margin-bottom: 16px;
+  .package__description {
+    margin-bottom: 28px;
+    font-size: 14px;
   }
 
   .submit__button {

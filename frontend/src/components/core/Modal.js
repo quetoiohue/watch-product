@@ -1,4 +1,4 @@
-import { Fade, IconButton, Modal } from '@material-ui/core'
+import { Fade, IconButton, Modal, Backdrop } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import React from 'react'
 import styled from 'styled-components'
@@ -8,6 +8,7 @@ const BasicModal = ({ isOpen, close, title, children }) => {
     <ModalContainer
       open={isOpen}
       closeAfterTransition
+      BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
       }}
