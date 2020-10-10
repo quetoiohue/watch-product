@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import AppHeader from '../components/core/AppHeader'
 import { httpGet } from '../helpers/http'
+import { loadNotifications } from '../reducers/actions/notification'
 import { loadUser, setEditingProduct } from '../reducers/actions/user'
 
 const AuthLayout = ({ children }) => {
@@ -37,6 +38,22 @@ const AuthLayout = ({ children }) => {
     }
 
     fetchUser()
+  }, [params])
+
+  React.useEffect(() => {
+    async function fetchNotifications() {
+      try {
+        const response = await httpGet('/notifications')
+
+        const { result } = response
+
+        await dispatch(loadNotifications(result))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchNotifications()
   }, [])
 
   return (

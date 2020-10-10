@@ -23,6 +23,14 @@ export default function reducer(state = initialState, action) {
         ...state,
         editingProduct: action.payload,
       }
+    case userActionTypes.ADD_PRODUCT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          products: [...state.user.products, action.payload],
+        },
+      }
     case userActionTypes.UPDATE_PRODUCT:
       const updateList = state.user.products
       const updatedIndex = updateList.findIndex(

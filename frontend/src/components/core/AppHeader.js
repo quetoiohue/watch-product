@@ -1,22 +1,68 @@
-import { Container, IconButton, Portal } from '@material-ui/core'
 import {
+  Badge,
+  Container,
+  IconButton,
+  Menu,
+  MenuItem,
+  Popover,
+} from '@material-ui/core'
+import {
+  AccountCircle,
   AddCircleOutline,
   NotificationsNone,
-  AccountCircle,
 } from '@material-ui/icons'
-import { useHistory } from 'react-router-dom'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import ButtonSubmit from './ButtonSubmit'
+import { getNoReadNotification } from '../../helpers'
+import { appendNotifications } from '../../reducers/actions/notification'
+import singlePusher from '../../services/pusher'
+import Modal from '../core/Modal'
+import AddProductModal from '../modals/AddProductModal'
 import LightLogo from './LightLogo'
+import NotificationList from './NotificationList'
 
 const AppHeader = (props) => {
   const history = useHistory()
+  const dispatch = useDispatch()
+  const { notifications } = useSelector((state) => state.notifications)
   const container = React.useRef(null)
+  const [openAddProduct, setOpenAddProduct] = React.useState(false)
+  const [anchorNotify, setAnchorNotify] = React.useState(null)
+
+  const handleClick = (event) => {
+    setAnchorNotify(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorNotify(null)
+  }
+
+  const open = Boolean(anchorNotify)
+
+  React.useEffect(() => {
+    function messageEventHandler(data) {
+      console.log(data)
+      dispatch(appendNotifications(data.notification))
+    }
+
+    const pusher = singlePusher.getInstance()
+    let channel = pusher.subscribe('trigger-price')
+
+    channel.bind('trigger-event', messageEventHandler)
+
+    return () => {
+      channel.unbind()
+      pusher.unsubscribe(channel)
+      pusher.disconnect()
+    }
+  }, [])
 
   const onClickSetting = () => {
     history.push('/setting')
   }
+
   return (
     <AppHeaderContainer className="flex-none">
       <Container className="py-2">
@@ -26,18 +72,41 @@ const AppHeader = (props) => {
           </div>
           <div className="nav-spacing flex-1" />
           <div className="nav-btn flex-none flex">
-            <IconButton>
+            <IconButton onClick={() => setOpenAddProduct(true)}>
               <AddCircleOutline />
             </IconButton>
-            <IconButton>
-              <NotificationsNone />
-            </IconButton>
+            <div>
+              <IconButton onClick={handleClick}>
+                <Badge
+                  badgeContent={getNoReadNotification(notifications)}
+                  color="primary"
+                >
+                  <NotificationsNone />
+                </Badge>
+              </IconButton>
+              <Popover
+                open={open}
+                anchorEl={anchorNotify}
+                onClose={handleClose}
+                style={PopoverStyle}
+                anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+              >
+                <NotificationList handleClose={handleClose} />
+              </Popover>
+            </div>
             <IconButton onClick={onClickSetting}>
               <AccountCircle />
             </IconButton>
           </div>
         </div>
       </Container>
+      <Modal
+        isOpen={openAddProduct}
+        close={() => setOpenAddProduct(false)}
+        title="Add Product"
+      >
+        <AddProductModal />
+      </Modal>
     </AppHeaderContainer>
   )
 }
@@ -52,3 +121,7 @@ const AppHeaderContainer = styled.div`
     color: var(--gray-2);
   }
 `
+const PopoverStyle = {
+  top: '0px',
+  left: '-50px',
+}

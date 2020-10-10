@@ -21,6 +21,13 @@ export const setEditingProduct = (payload) => {
   }
 }
 
+export const addProduct = (payload) => {
+  return {
+    type: userActionTypes.ADD_PRODUCT,
+    payload,
+  }
+}
+
 export const deleteProduct = (payload) => {
   return {
     type: userActionTypes.DELETE_PRODUCT,

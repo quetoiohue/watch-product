@@ -51,7 +51,10 @@ const ModalContainer = styled(Modal)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 12px;
+    border-bottom: 1px solid var(--gray-2);
+
     .modal__header--title {
       margin-left: 16px;
       font-size: 18px;

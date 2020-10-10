@@ -37,7 +37,7 @@ const ErrorModalContainer = styled.div`
     background-color: rgb(253, 236, 234);
 
     .error__modal--icon {
-      margin-right: 20px;
+      margin-right: 12px;
       margin-left: -20px;
     }
   }

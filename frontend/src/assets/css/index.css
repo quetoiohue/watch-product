@@ -1,4 +1,5 @@
 @import './layouts/app.css';
+@import './components/popup.css';
 
 /* reset css */
 html,

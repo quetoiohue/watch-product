@@ -22,3 +22,15 @@ export const getAlertValue = (alerts, alertId) => {
 
   return !!alertItem.status
 }
+
+export const checkExistingProduct = (products, link) => {
+  return products.some((_p) => _p.link === link)
+}
+
+export function createMarkup(htmlInput) {
+  return { __html: htmlInput }
+}
+
+export function getNoReadNotification(notifications) {
+  return notifications?.filter((_n) => !_n.status).length
+}

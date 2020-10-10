@@ -55,7 +55,8 @@ const DetailContainer = styled.div`
 
       .product__detail--sum {
         .product__sum--name {
-          font-size: 16px;
+          font-size: 14px;
+          line-height: 18px;
           font-weight: 600;
           color: var(--default);
           margin-bottom: 8px;

@@ -122,6 +122,7 @@ const Setting = () => {
           color="primary"
           className="footer__btn"
           onClick={onSave}
+          isWorking={isProcessing}
         >
           Save
         </ButtonSubmit>

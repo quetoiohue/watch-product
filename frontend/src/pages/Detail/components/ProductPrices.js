@@ -11,19 +11,19 @@ const ProductPrices = () => {
     <>
       <Paper className="highlight__prices">
         <div className="highlight__price flex justify-between items-center">
-          <Typography variant="subtitle1">Current price </Typography>
+          <Typography>Current price </Typography>
           <Typography className="text-primary">
             {formatMoney(actual_price)}
           </Typography>
         </div>
         <div className="highlight__price flex justify-between items-center">
-          <Typography variant="subtitle1">The cheapest price </Typography>
+          <Typography>The cheapest price </Typography>
           <Typography className="text-success">
             {formatMoney(cheapest_price)}
           </Typography>
         </div>
         <div className="highlight__price flex justify-between items-center">
-          <Typography variant="subtitle1">Initial price </Typography>
+          <Typography>Initial price </Typography>
           <Typography className="text-warning">
             {formatMoney(initial_price)}
           </Typography>
