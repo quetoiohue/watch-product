@@ -52,6 +52,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::prefix('package-types')->group(function() {
         Route::get('/', 'API\PackageTypesController@index');
     });
+
+    // Notifications
+    Route::prefix('notifications')->group(function() {
+        Route::get('/', 'API\NotificationsController@index');
+        Route::put('/', 'API\NotificationsController@update');
+    });
 });
 
 

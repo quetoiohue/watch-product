@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Jobs; 
+namespace App\Jobs;
 
+use App\Events\NewPrice;
 use App\Http\Controllers\API\ProductsController;
 use App\Mail\TriggerMail;
+use App\Notifications;
 use App\ProductAlerts;
 use App\ProductHistories;
 use App\Products;
@@ -16,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Nexmo\Laravel\Facade\Nexmo;
+use stdClass;
 
 class TriggerProduct implements ShouldQueue 
 {
@@ -51,7 +54,6 @@ class TriggerProduct implements ShouldQueue
                 if ($productInfo['price'] != $this->product->actual_price) {
                     // Add product history
                     $productHistory = new ProductHistories;
-        
                     $productHistory->product_id = $this->product->id;
                     $productHistory->price = $this->product->actual_price;
                     $productHistory->created_at = $this->product->created_at;
@@ -65,7 +67,16 @@ class TriggerProduct implements ShouldQueue
                     $this->product->inventory_status = $productInfo['inventory_status'];
         
                     $this->product->save();
+
+                    $newNotification = new Notifications();
+                    $newNotification->product_id = $this->product->id;
+                    $newNotification->text = "<p>Price made change from <strong>" . $productHistory->price . " " .$this->product->currency .
+                     "</strong> to <strong>" . $this->product->actual_price . " " . $this->product->currency . "</strong></p>" ;
+
+                    $newNotification->save();
                     
+                    event(new NewPrice($newNotification, $this->product));
+
                     // Handle Alert
                     $productAlerts = $this->product->productAlerts;
                     foreach($productAlerts as $productAlert) {

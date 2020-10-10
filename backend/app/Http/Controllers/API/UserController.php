@@ -19,7 +19,6 @@ class UserController extends Controller {
         $products = Auth::user()->products;
         foreach($products as $product) {
             TriggerProduct::dispatch($product);
-            sleep(1);
         }
 
         return $this->responseSuccess(200, "Done");

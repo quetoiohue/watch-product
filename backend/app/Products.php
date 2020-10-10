@@ -22,7 +22,7 @@ class Products extends Model
 ];
 
   protected $appends = ['cheapest_price', 'initial_price'];
-
+  
   public function user() {
     return $this->belongsTo('App\User', 'user_id');
   }
@@ -33,6 +33,10 @@ class Products extends Model
 
   public function productAlerts() {
     return $this->hasMany('App\ProductAlerts', 'product_id', 'id');
+  }
+
+  public function productNotifications() {
+    return $this->hasMany('App\Notifications', 'product_id', 'id');
   }
 
   public function getCurrentPriceAttribute()
