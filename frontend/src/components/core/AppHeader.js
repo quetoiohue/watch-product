@@ -30,16 +30,10 @@ const AppHeader = (props) => {
   const container = React.useRef(null)
   const [openAddProduct, setOpenAddProduct] = React.useState(false)
   const [anchorNotify, setAnchorNotify] = React.useState(null)
-
-  const handleClick = (event) => {
-    setAnchorNotify(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorNotify(null)
-  }
+  const [anchorMenu, setAnchorMenu] = React.useState(null)
 
   const open = Boolean(anchorNotify)
+  const openMenu = Boolean(anchorMenu)
 
   React.useEffect(() => {
     function messageEventHandler(data) {
@@ -49,7 +43,6 @@ const AppHeader = (props) => {
 
     const pusher = singlePusher.getInstance()
     let channel = pusher.subscribe('trigger-price')
-
     channel.bind('trigger-event', messageEventHandler)
 
     return () => {
@@ -60,7 +53,30 @@ const AppHeader = (props) => {
   }, [])
 
   const onClickSetting = () => {
+    handleCloseMenu()
     history.push('/setting')
+  }
+
+  const onClickLogout = () => {
+    handleCloseMenu()
+    localStorage.removeItem('authToken')
+    window.location.href = '/landing'
+  }
+
+  const handleClick = (event) => {
+    setAnchorNotify(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorNotify(null)
+  }
+
+  const handleClickMenu = (event) => {
+    setAnchorMenu(event.currentTarget)
+  }
+
+  const handleCloseMenu = () => {
+    setAnchorMenu(null)
   }
 
   return (
@@ -94,9 +110,21 @@ const AppHeader = (props) => {
                 <NotificationList handleClose={handleClose} />
               </Popover>
             </div>
-            <IconButton onClick={onClickSetting}>
-              <AccountCircle />
-            </IconButton>
+            <div>
+              <IconButton onClick={handleClickMenu}>
+                <AccountCircle />
+              </IconButton>
+              <Popover
+                open={openMenu}
+                anchorEl={anchorMenu}
+                onClose={handleCloseMenu}
+                // style={PopoverStyle}
+                anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+              >
+                <MenuItem onClick={onClickSetting}>Setting</MenuItem>
+                <MenuItem onClick={onClickLogout}>Logout</MenuItem>
+              </Popover>
+            </div>
           </div>
         </div>
       </Container>

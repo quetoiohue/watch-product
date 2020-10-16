@@ -20,41 +20,43 @@ const ProductInfo = () => {
   } = editingProduct || {}
 
   return (
-    <>
-      <Paper>
-        <div className="flex product__info">
-          <img src={image} alt="product" />
-          <div className="product__info--detail flex items-center justify-between flex-1">
-            <div className="product__detail--sum">
-              <p className="product__sum--name">{name}</p>
-              <div className="flex">
-                <span className="actual__price">
-                  {formatMoney(actual_price)}
-                </span>
-                <span className="old__price">{formatMoney(old_price)}</span>
+    editingProduct && (
+      <>
+        <Paper>
+          <div className="flex product__info">
+            <img src={image} alt="product" />
+            <div className="product__info--detail flex items-center justify-between flex-1">
+              <div className="product__detail--sum">
+                <p className="product__sum--name">{name}</p>
+                <div className="flex">
+                  <span className="actual__price">
+                    {formatMoney(actual_price)}
+                  </span>
+                  <span className="old__price">{formatMoney(old_price)}</span>
+                </div>
+                <p className="product__sum--alert">
+                  <NotificationsNone />
+                  {product_alerts?.map((_alert) => {
+                    return (
+                      <span key={_alert.alert_type_id}>{getAlert(_alert)}</span>
+                    )
+                  })}
+                </p>
               </div>
-              <p className="product__sum--alert">
-                <NotificationsNone />
-                {product_alerts?.map((_alert) => {
-                  return (
-                    <span key={_alert.alert_type_id}>{getAlert(_alert)}</span>
-                  )
-                })}
-              </p>
+              <div className="product__discount">{discount}%</div>
             </div>
-            <div className="product__discount">{discount}%</div>
           </div>
-        </div>
-      </Paper>
-      <ButtonSubmit
-        href={link}
-        target="_blank"
-        className="product__btn"
-        endIcon={<ArrowRightAlt />}
-      >
-        GO TO SHOP
-      </ButtonSubmit>
-    </>
+        </Paper>
+        <ButtonSubmit
+          href={link}
+          target="_blank"
+          className="product__btn"
+          endIcon={<ArrowRightAlt />}
+        >
+          GO TO SHOP
+        </ButtonSubmit>
+      </>
+    )
   )
 }
 

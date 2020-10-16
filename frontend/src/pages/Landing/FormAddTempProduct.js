@@ -1,6 +1,5 @@
 import { Button, fade, Input, Typography } from '@material-ui/core'
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import guestApis from '../../apis/guest'
 import ButtonSubmit from '../../components/core/ButtonSubmit'
 import { validURL } from '../../helpers/validate'
@@ -8,7 +7,6 @@ import useInputChange from '../../hooks/useInputChange'
 import { displayModal } from '../../reducers/actions/modal'
 
 const FormAddTempProduct = (props) => {
-  const dispatch = useDispatch()
   const [formState, onChangeInput, setFormState] = useInputChange({
     link: '',
   })
@@ -29,9 +27,9 @@ const FormAddTempProduct = (props) => {
       const reachedLimit = props.products?.length > 4
 
       if (reachedLimit) {
-        dispatch(
-          displayModal('error-modal', { text: 'You need login to add more.' })
-        )
+        await displayModal('error-modal', {
+          text: 'You need login to add more.',
+        })
 
         return
       }
@@ -43,9 +41,13 @@ const FormAddTempProduct = (props) => {
       }
 
       if (!validURL(link)) {
-        dispatch(
-          displayModal('error-modal', { text: 'Your URL is not valid.' })
-        )
+        await displayModal('error-modal', { text: 'Your URL is not valid.' })
+
+        return
+      }
+
+      if (props.products.some((_p) => _p.link === link)) {
+        await displayModal('error-modal', { text: 'Your URL exists already.' })
 
         return
       }

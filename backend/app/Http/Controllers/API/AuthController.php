@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 
@@ -79,5 +80,15 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($token->expires_at)->toDateTimeString()
         ]);
+    }
+
+    public function logout() {
+        try {
+            Auth::logout();
+            return $this->responseSuccess(200, "user has been logged out.");
+        } catch (Exception $error) {
+            echo $error;
+            return $this->responseServerError(500, $error);
+        }
     }
 }

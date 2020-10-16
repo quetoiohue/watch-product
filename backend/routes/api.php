@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Auth api
 Route::prefix('auth')->group(function() {
     Route::post('login/{provider}', 'API\AuthController@login');
+    Route::get('logout', 'API\AuthController@logout')->middleware(['auth:api']);
 });
 
 // Guest api

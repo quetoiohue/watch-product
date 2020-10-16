@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Nexmo\Laravel\Facade\Nexmo;
-use stdClass;
+use Illuminate\Support\Facades\Log;
 
 class TriggerProduct implements ShouldQueue 
 {
@@ -74,7 +74,7 @@ class TriggerProduct implements ShouldQueue
                      "</strong> to <strong>" . $this->product->actual_price . " " . $this->product->currency . "</strong></p>" ;
 
                     $newNotification->save();
-                    
+                 
                     event(new NewPrice($newNotification, $this->product));
 
                     // Handle Alert

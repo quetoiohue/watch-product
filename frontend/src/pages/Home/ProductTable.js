@@ -1,9 +1,11 @@
+import { TableHead } from '@material-ui/core'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import FadeTable from '../../components/core/FadeTable'
 import SimpleTable from '../../components/core/SimpleTable'
 import { CALL, EMAIL, SMS } from '../../constants'
 import { getAlert } from '../../helpers'
@@ -23,12 +25,24 @@ export default function ProductTable(props) {
 
   const Headers = (
     <React.Fragment>
-      <TableCell>Product</TableCell>
-      <TableCell align="center">Alerts</TableCell>
-      <TableCell align="right">Actual Price</TableCell>
-      <TableCell align="right">Old Price</TableCell>
-      <TableCell align="center">Discount</TableCell>
-      <TableCell align="center">Date</TableCell>
+      <TableHead>
+        <TableCell>Product</TableCell>
+        <TableCell style={{ width: 150 }} align="right">
+          Alerts
+        </TableCell>
+        <TableCell style={{ width: 150 }} align="right">
+          Actual Price
+        </TableCell>
+        <TableCell style={{ width: 150 }} align="right">
+          Old Price
+        </TableCell>
+        <TableCell style={{ width: 150 }} align="right">
+          Discount
+        </TableCell>
+        <TableCell style={{ width: 150 }} align="right">
+          Date
+        </TableCell>
+      </TableHead>
     </React.Fragment>
   )
 
@@ -42,7 +56,11 @@ export default function ProductTable(props) {
               <p>{row.name}</p>
             </div>
           </TableCell>
-          <TableCell align="center" className="product__alerts">
+          <TableCell
+            style={{ width: 150 }}
+            align="right"
+            className="product__alerts font-medium"
+          >
             {row.product_alerts.map((_alert) => {
               return (
                 !!_alert.status && (
@@ -51,28 +69,59 @@ export default function ProductTable(props) {
               )
             })}
           </TableCell>
-          <TableCell align="right">
+          <TableCell
+            style={{ width: 150 }}
+            align="right"
+            className="font-semibold"
+          >
             {formatMoney(row.actual_price, row.currency)}
           </TableCell>
-          <TableCell align="right" className="old__price">
+          <TableCell
+            style={{ width: 150 }}
+            align="right"
+            className="old__price font-semibold"
+          >
             {formatMoney(row.old_price, row.currency)}
           </TableCell>
-          <TableCell align="center">-{row.discount}%</TableCell>
-          <TableCell align="center">{formatDate(row.created_at)}</TableCell>
+          <TableCell
+            style={{ width: 150 }}
+            align="right"
+            className="font-semibold"
+          >
+            -{row.discount}%
+          </TableCell>
+          <TableCell style={{ width: 150 }} align="right">
+            {formatDate(row.created_at)}
+          </TableCell>
         </TableRowInner>
       ))}
     </React.Fragment>
   )
 
   return (
-    <React.Fragment>
+    <TableContainer>
       {/* <Portal container={document.getElementById('header__icon')}>
         <span>But I actually render here!</span>
       </Portal> */}
-      <SimpleTable Headers={Headers} Rows={<Rows />} />
-    </React.Fragment>
+      <FadeTable Headers={Headers} Rows={<Rows />} />
+    </TableContainer>
   )
 }
+
+const TableContainer = styled.div`
+  .table__body {
+    max-height: 400px;
+    td,
+    th {
+      &.font-medium {
+        font-weight: 500;
+      }
+      &.font-semibold {
+        font-weight: 600;
+      }
+    }
+  }
+`
 
 const TableRowInner = styled(TableRow)`
   cursor: pointer;
@@ -91,7 +140,7 @@ const TableRowInner = styled(TableRow)`
 
   .product__alerts {
     word-break: break-word;
-
+    font-weight: 500;
     span {
       margin-right: 5px;
     }

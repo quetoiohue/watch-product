@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
             foreach ($products as $product) {
                 TriggerProduct::dispatch($product);
             }
-        })->everyMinute();
+        })->cron('* * * * *');
     }
 
     /**

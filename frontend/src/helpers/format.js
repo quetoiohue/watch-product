@@ -2,12 +2,15 @@ export const formatMoney = (number, currency = 'VND') => {
   return new Intl.NumberFormat('vie', {
     style: 'currency',
     currency,
-    maximumSignificantDigits: 3,
-  }).format(number)
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })
+    .format(number?.toFixed(0))
+    .replace(new RegExp('[.]', 'g'), ',')
 }
 
 export const formatDate = (date) => {
-  return new Intl.DateTimeFormat('vie').format(new Date(date))
+  return new Intl.DateTimeFormat('en-US').format(new Date(date))
 }
 
 export const formatDateTime = (date) => {
