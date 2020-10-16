@@ -68,4 +68,14 @@ const ModalContainer = styled(Modal)`
   .modal__inner {
     padding: 0px 55px 55px;
   }
+
+  ${({ theme }) => theme.mobile`
+  .modal__container {
+    width: calc(100% - 10px);
+  }
+  .modal__inner {
+    padding: 0px 20px 55px 30px;
+  }
+      
+    `}
 `

@@ -63,6 +63,16 @@ const LandingContainer = styled.div`
       width: 400px;
       margin-right: 12px;
     }
+
+    ${({ theme }) => theme.mobile`
+      .input, button {
+        width:100%;
+        margin-bottom: 24px;
+        }
+       .subtext {
+        text-align: center;
+       }
+      `}
   }
 
   .table-container {

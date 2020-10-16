@@ -74,6 +74,11 @@ const MenuItemContainer = styled(MenuItem)`
       line-height: 16px;
       font-size: 13px;
       margin-bottom: 4px;
+
+      ${({ theme }) => theme.mobile`
+      font-size: 12px;
+      
+      `}
     }
     .MuiListItemText-secondary {
       font-size: 11px;

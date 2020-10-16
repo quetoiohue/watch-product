@@ -38,7 +38,7 @@ const HeaderButtons = () => {
   }
   return (
     <>
-      <Toolbar className="items-center justify-end">
+      <Toolbar className="items-center justify-end toolbar">
         <ButtonSubmit
           color="primary"
           variant="contained"

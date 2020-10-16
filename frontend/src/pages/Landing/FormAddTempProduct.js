@@ -88,7 +88,7 @@ const FormAddTempProduct = (props) => {
         >
           Add Product
         </ButtonSubmit>
-        <Typography variant="body1" className="text-left">
+        <Typography variant="body1" className="text-left subtext">
           <span className="text-primary">Supported stores:</span> tiki.com,
           shopee.com
         </Typography>

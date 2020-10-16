@@ -135,4 +135,8 @@ const AddProductModalContainer = styled.div`
   .form__btn {
     margin-top: 40px;
   }
+
+  ${({ theme }) => theme.mobile`
+      margin: 0px auto;
+  `}
 `

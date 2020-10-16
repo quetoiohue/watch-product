@@ -48,4 +48,8 @@ export default NotificationList
 const MenuListContainer = styled(MenuList)`
   width: 400px;
   max-height: 400px;
+
+  ${({ theme }) => theme.mobile`
+    width: 300px;
+  `}
 `

@@ -18,12 +18,13 @@ import ProductPrices from './components/ProductPrices'
 const Detail = () => {
   return (
     <DetailContainer>
-      <HeaderButtons />
+      {<HeaderButtons />}
       <Grid container spacing={3} className="content__section">
-        <Grid item xs={6}>
+        <Grid item sm={6} xs={12}>
           <ProductInfo />
         </Grid>
-        <Grid item xs={6}>
+        {/* {!!window.innerWidth <= 468 && <HeaderButtons />} */}
+        <Grid item sm={6} xs={12}>
           <ProductPrices />
         </Grid>
         <Grid item xs={12} className="mt-5">
@@ -37,8 +38,11 @@ const Detail = () => {
 export default Detail
 
 const DetailContainer = styled.div`
-  .toolbar-btn {
-    margin-left: 8px;
+  .toolbar {
+    padding: 0px;
+    .toolbar-btn {
+      margin-left: 8px;
+    }
   }
 
   .content__section {
@@ -111,4 +115,28 @@ const DetailContainer = styled.div`
       }
     }
   }
+
+  ${({ theme }) => theme.mobile`
+    .toolbar {
+      width: 100%;
+      flex-wrap: wrap;
+    .toolbar-btn {
+        margin: 0px;
+        margin-bottom: 12px;
+        width: 100%;
+      }
+    }
+    .content__section {
+      .product__info {
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    .product__btn {
+        width: 100% !important;
+      }
+    }
+    
+  `}
 `

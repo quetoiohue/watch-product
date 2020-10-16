@@ -13,6 +13,11 @@ export const formatDate = (date) => {
   return new Intl.DateTimeFormat('en-US').format(new Date(date))
 }
 
+export const formatMonth = (date) => {
+  const newDate = new Date(date)
+  return `${newDate.getMonth() + 1}.${newDate.getFullYear()}`
+}
+
 export const formatDateTime = (date) => {
   date = new Date(date)
   var hours = date.getHours()

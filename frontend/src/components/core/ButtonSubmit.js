@@ -27,4 +27,12 @@ const ButtonSubmitInner = styled(Button)`
   .hidden {
     visibility: hidden;
   }
+
+  ${({ theme }) => theme.mobile`
+    &.MuiButton-root {
+      height: 30px;
+      font-size: 13px;
+    }
+       
+  `}
 `

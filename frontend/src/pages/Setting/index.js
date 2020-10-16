@@ -73,7 +73,7 @@ const Setting = () => {
 
   const mainContent = (
     <>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end card__wrapper">
         <div className="flex-1">
           <form className="form__container">
             <div className="form__control">
@@ -163,4 +163,16 @@ const SettingContainer = styled.div`
       width: 100px;
     }
   }
+
+  ${({ theme }) => theme.mobile`
+    .card__wrapper {
+      flex-wrap: wrap;
+    }
+    .content__container .notice__container {
+        margin: 20px 0px;
+        button {
+          margin-left: 8px;
+        }
+      }  
+  `}
 `

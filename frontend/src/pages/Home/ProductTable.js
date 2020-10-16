@@ -1,15 +1,13 @@
-import { TableHead } from '@material-ui/core'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
+import { TableCell, TableHead, TableRow } from '@material-ui/core'
+import { NotificationsActive } from '@material-ui/icons'
+import styled from 'styled-components'
+
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
 import FadeTable from '../../components/core/FadeTable'
-import SimpleTable from '../../components/core/SimpleTable'
-import { CALL, EMAIL, SMS } from '../../constants'
 import { getAlert } from '../../helpers'
-import { formatDate, formatMoney } from '../../helpers/format'
+import { formatDate, formatMoney, formatMonth } from '../../helpers/format'
 import { setEditingProduct } from '../../reducers/actions/user'
 
 export default function ProductTable(props) {
@@ -49,7 +47,7 @@ export default function ProductTable(props) {
   const Rows = () => (
     <React.Fragment>
       {products?.map((row) => (
-        <TableRowInner key={row.name} hover onClick={() => onClickRow(row)}>
+        <TableRowInner key={row.id} hover onClick={() => onClickRow(row)}>
           <TableCell component="th" scope="row">
             <div className="product__info">
               <img src={row.image} alt="product image" />
@@ -98,12 +96,74 @@ export default function ProductTable(props) {
     </React.Fragment>
   )
 
+  const renderMobile = {
+    Headers: (
+      <React.Fragment>
+        <TableHead>
+          <TableCell>Product</TableCell>
+          <TableCell style={{ width: 250 }} align="center">
+            Price
+          </TableCell>
+        </TableHead>
+      </React.Fragment>
+    ),
+    Rows: (
+      <React.Fragment>
+        {products?.map((row) => (
+          <TableRow
+            key={row.id}
+            className="mobile__row"
+            hover
+            onClick={() => onClickRow(row)}
+          >
+            <TableCell component="th" scope="row">
+              <div className="product__img">
+                <img src={row.image} alt="product image" />
+                {!!row.product_alerts.length && (
+                  <NotificationsActive color="action" className="img__notice" />
+                )}
+              </div>
+            </TableCell>
+            <TableCell
+              style={{ width: 250 }}
+              className="info__cell"
+              align="center"
+            >
+              <div className="product__info flex items-center justify-between">
+                <div>
+                  <p className="info__name">{row.name}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="actual__price font-semibold">
+                      {formatMoney(row.actual_price, row.currency)}
+                    </div>
+                    <div className="old_price font-semibold">
+                      {formatMoney(row.old_price, row.currency)}
+                    </div>
+                  </div>
+                </div>
+                <div className="info__discount">
+                  <p className="text-primary discount__value">
+                    -{row.discount}%
+                  </p>
+                  <p className="discount__date">
+                    {formatMonth(row.created_at)}
+                  </p>
+                </div>
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+      </React.Fragment>
+    ),
+  }
+
   return (
     <TableContainer>
-      {/* <Portal container={document.getElementById('header__icon')}>
-        <span>But I actually render here!</span>
-      </Portal> */}
-      <FadeTable Headers={Headers} Rows={<Rows />} />
+      {window.innerWidth <= 468 ? (
+        <FadeTable Headers={renderMobile.Headers} Rows={renderMobile.Rows} />
+      ) : (
+        <FadeTable Headers={Headers} Rows={<Rows />} />
+      )}
     </TableContainer>
   )
 }
@@ -120,33 +180,70 @@ const TableContainer = styled.div`
         font-weight: 600;
       }
     }
-  }
-`
+    tr {
+      .product__info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
 
-const TableRowInner = styled(TableRow)`
-  cursor: pointer;
+        img {
+          width: 50px;
+          height: auto;
+          margin-right: 8px;
+        }
 
-  .product__info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+        .old__price {
+          text-decoration: line-through;
+        }
+      }
 
-    img {
-      width: 50px;
-      height: auto;
-      margin-right: 8px;
+      .product__alerts {
+        word-break: break-word;
+        font-weight: 500;
+        span {
+          margin-right: 5px;
+        }
+      }
     }
   }
 
-  .product__alerts {
-    word-break: break-word;
-    font-weight: 500;
-    span {
-      margin-right: 5px;
+  .mobile__row {
+    .info__cell {
+      text-align: left;
+      font-size: 12px;
+      line-height: 14px;
+      padding: 12px 10px;
+
+      .info__discount {
+        text-align: right;
+        margin-left: 12px;
+      }
+
+      .product__info {
+        align-items: start;
+      }
+
+      .info__name {
+        margin-bottom: 8px;
+      }
+      .old_price {
+        text-decoration: line-through;
+      }
+    }
+
+    .product__img {
+      position: relative;
+      .img__notice {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+      }
+      img {
+        width: 50px;
+        height: auto;
+      }
     }
   }
-
-  .old__price {
-    text-decoration: line-through;
-  }
 `
+
+const TableRowInner = styled(TableRow)``

@@ -29,7 +29,7 @@ const Checkout = () => {
   )
 
   const mainContent = (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center card__wrapper">
       {packageTypes.map((_package) => (
         <PackageCard key={_package.id} packageType={_package} />
       ))}
@@ -53,4 +53,10 @@ const CheckoutContainer = styled.div`
       border: none;
     }
   }
+
+  ${({ theme }) => theme.mobile`
+    .card__wrapper {
+      flex-wrap: wrap;
+    }
+  `}
 `

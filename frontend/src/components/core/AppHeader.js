@@ -149,7 +149,13 @@ const AppHeaderContainer = styled.div`
     color: var(--gray-2);
   }
 `
-const PopoverStyle = {
-  top: '0px',
-  left: '-50px',
-}
+const PopoverStyle =
+  window.innerWidth <= 468
+    ? {
+        top: '0px',
+        left: '-47px',
+      }
+    : {
+        top: '0px',
+        left: '-50px',
+      }
