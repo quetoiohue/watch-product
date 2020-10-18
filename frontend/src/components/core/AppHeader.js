@@ -2,7 +2,6 @@ import {
   Badge,
   Container,
   IconButton,
-  Menu,
   MenuItem,
   Popover,
 } from '@material-ui/core'
@@ -50,7 +49,7 @@ const AppHeader = (props) => {
       pusher.unsubscribe(channel)
       pusher.disconnect()
     }
-  }, [])
+  }, [dispatch])
 
   const onClickSetting = () => {
     handleCloseMenu()

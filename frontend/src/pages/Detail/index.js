@@ -1,15 +1,6 @@
-import { Grid, Paper, Toolbar, Typography } from '@material-ui/core'
-import {
-  ArrowRightAlt,
-  DeleteOutline,
-  NotificationsNone,
-} from '@material-ui/icons'
+import { Grid } from '@material-ui/core'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-
-import { formatMoney } from '../../helpers/format'
-import ButtonSubmit from '../../components/core/ButtonSubmit'
 import HeaderButtons from './components/HeaderButtons'
 import HistoriesChart from './components/HistoriesChart'
 import ProductInfo from './components/ProductInfo'
@@ -114,6 +105,10 @@ const DetailContainer = styled.div`
         }
       }
     }
+  }
+
+  .old__price {
+    text-decoration: line-through;
   }
 
   ${({ theme }) => theme.mobile`

@@ -1,6 +1,5 @@
 import {
   Avatar,
-  ListItem,
   ListItemAvatar,
   ListItemText,
   MenuItem,

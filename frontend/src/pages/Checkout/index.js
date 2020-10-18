@@ -1,10 +1,8 @@
-import { Paper } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components'
+import BasicPaper from '../../components/core/BasicPaper'
 import { httpGet } from '../../helpers/http'
 import PackageCard from './components/PackageCard'
-import BasicPaper from '../../components/core/BasicPaper'
-import { displayModal } from '../../reducers/actions/modal'
 
 const Checkout = () => {
   const [packageTypes, setPackageTypes] = React.useState([])

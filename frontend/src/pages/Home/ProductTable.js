@@ -50,7 +50,7 @@ export default function ProductTable(props) {
         <TableRowInner key={row.id} hover onClick={() => onClickRow(row)}>
           <TableCell component="th" scope="row">
             <div className="product__info">
-              <img src={row.image} alt="product image" />
+              <img src={row.image} alt="product" />
               <p>{row.name}</p>
             </div>
           </TableCell>
@@ -118,7 +118,7 @@ export default function ProductTable(props) {
           >
             <TableCell component="th" scope="row">
               <div className="product__img">
-                <img src={row.image} alt="product image" />
+                <img src={row.image} alt="product" />
                 {!!row.product_alerts.length && (
                   <NotificationsActive color="action" className="img__notice" />
                 )}

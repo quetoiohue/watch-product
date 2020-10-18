@@ -1,17 +1,15 @@
 import { Container } from '@material-ui/core'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import AppHeader from '../components/core/AppHeader'
-import { httpGet } from '../helpers/http'
 import { displayModal } from '../reducers/actions/modal'
 import { loadNotifications } from '../reducers/actions/notification'
 import { loadUser, setEditingProduct } from '../reducers/actions/user'
 
 const AuthLayout = ({ children }) => {
   const dispatch = useDispatch()
-  const history = useHistory()
   const params = useParams()
 
   React.useEffect(() => {
@@ -23,14 +21,13 @@ const AuthLayout = ({ children }) => {
           loadUser(),
           loadNotifications(),
         ])
-        console.log('response>>>>>>>>', response)
 
-        const [user, notifications] = response
+        const [user] = response[0]
 
         if (params.productId) {
           const { products } = user?.value
           const editingProduct = products?.find(
-            (_p) => _p.id == params.productId
+            (_p) => _p.id === Number(params.productId)
           )
 
           dispatch(setEditingProduct(editingProduct))
@@ -44,7 +41,7 @@ const AuthLayout = ({ children }) => {
     }
 
     fetchUser()
-  }, [params])
+  }, [params, dispatch])
 
   return (
     <React.Fragment>

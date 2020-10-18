@@ -2,11 +2,11 @@ import { Toolbar } from '@material-ui/core'
 import { DeleteOutline, NotificationsNone } from '@material-ui/icons'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { httpDelete } from '../../../helpers/http'
-import ButtonSubmit from '../../../components/core/ButtonSubmit'
-import { deleteProduct } from '../../../reducers/actions/user'
-import { displayModal, hideModal } from '../../../reducers/actions/modal'
 import { useHistory } from 'react-router-dom'
+import ButtonSubmit from '../../../components/core/ButtonSubmit'
+import { httpDelete } from '../../../helpers/http'
+import { displayModal } from '../../../reducers/actions/modal'
+import { deleteProduct } from '../../../reducers/actions/user'
 
 const HeaderButtons = () => {
   const dispatch = useDispatch()
@@ -39,8 +39,6 @@ const HeaderButtons = () => {
       await displayModal('error-modal', {
         text: `There's something wrong.`,
       })
-    } finally {
-      // dispatch(hideModal())
     }
   }
 

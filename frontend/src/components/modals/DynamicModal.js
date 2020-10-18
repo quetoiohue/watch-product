@@ -1,16 +1,14 @@
 import { Fade, IconButton, Modal } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-import styled from 'styled-components'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { hideModal } from '../../reducers/actions/modal'
-import ErrorModal from './ErrorModal'
-import SuccessModal from './SuccessModal'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
 import ConfirmModal from './ConfirmModal'
+import ErrorModal from './ErrorModal'
 import SpinnerLoading from './SpinnerLoading'
+import SuccessModal from './SuccessModal'
 
 const DynamicModal = () => {
-  const dispatch = useDispatch()
   const { modal, props } = useSelector((state) => state.modal)
 
   const ModalType = () => {

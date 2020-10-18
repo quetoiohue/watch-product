@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { httpPut } from '../../helpers/http'
-import { displayModal } from '../../reducers/actions/modal'
 import { updateNotifications } from '../../reducers/actions/notification'
 import NotificationListItem from './NotificationListItem'
 

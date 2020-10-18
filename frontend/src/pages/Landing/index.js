@@ -1,7 +1,6 @@
+import { Typography } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components'
-import { Button, Input, Typography } from '@material-ui/core'
-
 import DemoTable from './DemoTable'
 import FormAddTempProduct from './FormAddTempProduct'
 

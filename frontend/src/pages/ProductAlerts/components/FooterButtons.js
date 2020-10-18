@@ -10,8 +10,7 @@ import { updateProduct } from '../../../reducers/actions/user'
 const FooterButtons = ({ alerts }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const { user, editingProduct } = useSelector((state) => state.user)
-  const { total_point } = user || 0
+  const { editingProduct } = useSelector((state) => state.user)
   const [isWorking, setIsWorking] = React.useState(false)
 
   const onClickSkip = () => {

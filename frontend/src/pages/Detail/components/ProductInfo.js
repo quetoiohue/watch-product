@@ -2,8 +2,8 @@ import { Paper } from '@material-ui/core'
 import { ArrowRightAlt, NotificationsNone } from '@material-ui/icons'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getAlert } from '../../../helpers'
 import ButtonSubmit from '../../../components/core/ButtonSubmit'
+import { getAlert } from '../../../helpers'
 import { formatMoney } from '../../../helpers/format'
 
 const ProductInfo = () => {
@@ -14,7 +14,6 @@ const ProductInfo = () => {
     actual_price,
     old_price,
     discount,
-    currency,
     link,
     product_alerts,
   } = editingProduct || {}

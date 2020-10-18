@@ -2,16 +2,13 @@ import { TableHead } from '@material-ui/core'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import ButtonSubmit from '../../components/core/ButtonSubmit'
 import FadeTable from '../../components/core/FadeTable'
-import SimpleTable from '../../components/core/SimpleTable'
 import { formatMoney } from '../../helpers/format'
 import { displayModal } from '../../reducers/actions/modal'
 
 export default function DemoTable(props) {
-  const dispatch = useDispatch()
   const { products } = props
 
   const handleSave = async () => {
@@ -36,7 +33,7 @@ export default function DemoTable(props) {
         <TableRow key={row.title}>
           <TableCell component="th" scope="row">
             <div className="product__info">
-              <img src={row.imageURL} alt="product image" />
+              <img src={row.imageURL} alt=".product" />
               <p>{row.title}</p>
             </div>
           </TableCell>
@@ -74,7 +71,7 @@ export default function DemoTable(props) {
           <TableRow key={row.title} className="mobile__row">
             <TableCell component="th" scope="row">
               <div className="product__img">
-                <img src={row.imageURL} alt="product image" />
+                <img src={row.imageURL} alt=".product" />
               </div>
             </TableCell>
             <TableCell style={{ width: 250 }} align="center">

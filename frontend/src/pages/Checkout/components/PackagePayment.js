@@ -13,30 +13,10 @@ import InputField from '../../../components/core/InputField'
 import { httpPost } from '../../../helpers/http'
 import { displayModal } from '../../../reducers/actions/modal'
 
-const CARD_OPTIONS = {
-  iconStyle: 'solid',
-  style: {
-    base: {
-      iconColor: '#c4f0ff',
-      color: '#fff',
-      fontWeight: 500,
-      fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-      fontSize: '16px',
-      fontSmoothing: 'antialiased',
-      ':-webkit-autofill': { color: '#fce883' },
-      '::placeholder': { color: '#87bbfd' },
-    },
-    invalid: {
-      iconColor: '#ffc7ee',
-      color: '#ffc7ee',
-    },
-  },
-}
-
 const CheckoutForm = ({ packageType, finish }) => {
   const stripe = useStripe()
   const elements = useElements()
-  const { id, amount, points, currency } = packageType
+  const { id, amount } = packageType
 
   const user = useSelector((state) => state.user)
   const { name } = user?.user
@@ -61,7 +41,7 @@ const CheckoutForm = ({ packageType, finish }) => {
         return
       }
 
-      const response = await httpPost(
+      await httpPost(
         '/transaction/stripePayment',
         {
           token,

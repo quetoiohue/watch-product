@@ -1,8 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import defer from 'defer-promise'
-
-import LoadingImg from '../../assets/images/loading.gif'
 
 const SpinnerLoading = () => {
   const loadingTimeout = React.useRef(null)
