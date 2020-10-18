@@ -47,7 +47,6 @@ const AddProductModal = ({ close }) => {
         return
       }
       const isExistingProduct = checkExistingProduct(products, link)
-      console.log(products, isExistingProduct)
 
       if (!!isExistingProduct) {
         await displayModal('error-modal', {
@@ -65,7 +64,7 @@ const AddProductModal = ({ close }) => {
         {}
       )
 
-      const newProduct = response.result[0]
+      const newProduct = response.result
       dispatch(addProduct(newProduct))
       await displayModal('success-modal', {
         text: 'Product has been saved successfully.',

@@ -8,13 +8,34 @@ import { useHistory } from 'react-router-dom'
 import FadeTable from '../../components/core/FadeTable'
 import { getAlert } from '../../helpers'
 import { formatDate, formatMoney, formatMonth } from '../../helpers/format'
-import { setEditingProduct } from '../../reducers/actions/user'
+import { addProduct, setEditingProduct } from '../../reducers/actions/user'
+import { httpPost } from '../../helpers/http'
+import { displayModal } from '../../reducers/actions/modal'
 
 export default function ProductTable(props) {
   const history = useHistory()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user)
   const { products } = user?.user || []
+
+  React.useEffect(() => {
+    async function fetchLinksFromDemo() {
+      const links = JSON.parse(localStorage.getItem('links'))
+      if (links?.length) {
+        const response = await httpPost(
+          '/products',
+          {
+            links,
+          },
+          {}
+        )
+
+        localStorage.removeItem('links')
+      }
+    }
+
+    fetchLinksFromDemo()
+  }, [dispatch])
 
   const onClickRow = async (row) => {
     await dispatch(setEditingProduct(row))

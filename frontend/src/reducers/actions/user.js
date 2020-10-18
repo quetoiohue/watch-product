@@ -15,7 +15,7 @@ export const loadUser = async (payload) => {
 
     const { result } = response
 
-    store.dispatch({
+    await store.dispatch({
       type: userActionTypes.LOAD_USER,
       payload: result,
     })

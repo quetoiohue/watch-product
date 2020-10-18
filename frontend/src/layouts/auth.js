@@ -22,7 +22,7 @@ const AuthLayout = ({ children }) => {
           loadNotifications(),
         ])
 
-        const [user] = response[0]
+        const [user] = response
 
         if (params.productId) {
           const { products } = user?.value

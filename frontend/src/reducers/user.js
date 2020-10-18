@@ -24,11 +24,12 @@ export default function reducer(state = initialState, action) {
         editingProduct: action.payload,
       }
     case userActionTypes.ADD_PRODUCT:
+      const userProducts = state.user?.products || []
       return {
         ...state,
         user: {
           ...state.user,
-          products: [...state.user.products, action.payload],
+          products: [...action.payload, ...userProducts],
         },
       }
     case userActionTypes.UPDATE_PRODUCT:
