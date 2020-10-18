@@ -1,12 +1,7 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-
-import PublicLayout from '../layouts/public'
+import { Route, Switch } from 'react-router-dom'
 import AuthLayout from '../layouts/auth'
-import { httpGet } from '../helpers/http'
-import { loadUser } from '../reducers/actions/user'
-
+import PublicLayout from '../layouts/public'
 import routes from './routes'
 
 const AppRoute = () => {

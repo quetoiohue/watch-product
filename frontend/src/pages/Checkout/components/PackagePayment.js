@@ -46,6 +46,7 @@ const CheckoutForm = ({ packageType, finish }) => {
     event.preventDefault()
     try {
       setIsProcessing(true)
+
       const { token, error } = await stripe.createToken(
         elements.getElement(CardElement)
       )

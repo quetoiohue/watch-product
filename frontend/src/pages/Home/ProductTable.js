@@ -181,6 +181,7 @@ const TableContainer = styled.div`
       }
     }
     tr {
+      cursor: pointer;
       .product__info {
         display: flex;
         align-items: center;
@@ -191,10 +192,6 @@ const TableContainer = styled.div`
           height: auto;
           margin-right: 8px;
         }
-
-        .old__price {
-          text-decoration: line-through;
-        }
       }
 
       .product__alerts {
@@ -203,6 +200,9 @@ const TableContainer = styled.div`
         span {
           margin-right: 5px;
         }
+      }
+      .old__price {
+        text-decoration: line-through;
       }
     }
   }

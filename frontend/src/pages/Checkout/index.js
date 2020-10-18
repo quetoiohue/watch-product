@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { httpGet } from '../../helpers/http'
 import PackageCard from './components/PackageCard'
 import BasicPaper from '../../components/core/BasicPaper'
+import { displayModal } from '../../reducers/actions/modal'
 
 const Checkout = () => {
   const [packageTypes, setPackageTypes] = React.useState([])

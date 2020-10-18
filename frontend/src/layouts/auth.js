@@ -1,10 +1,11 @@
 import { Container } from '@material-ui/core'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import AppHeader from '../components/core/AppHeader'
 import { httpGet } from '../helpers/http'
+import { displayModal } from '../reducers/actions/modal'
 import { loadNotifications } from '../reducers/actions/notification'
 import { loadUser, setEditingProduct } from '../reducers/actions/user'
 
@@ -16,18 +17,23 @@ const AuthLayout = ({ children }) => {
   React.useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await httpGet('/users/whoami')
+        await displayModal('spinner-loading')
 
-        const { result } = response
+        const response = await Promise.allSettled([
+          loadUser(),
+          loadNotifications(),
+        ])
+        console.log('response>>>>>>>>', response)
 
-        await dispatch(loadUser(result))
+        const [user, notifications] = response
 
         if (params.productId) {
-          const editingProduct = result.products.find(
+          const { products } = user?.value
+          const editingProduct = products?.find(
             (_p) => _p.id == params.productId
           )
 
-          await dispatch(setEditingProduct(editingProduct))
+          dispatch(setEditingProduct(editingProduct))
         }
       } catch (error) {
         console.log(error)
@@ -39,22 +45,6 @@ const AuthLayout = ({ children }) => {
 
     fetchUser()
   }, [params])
-
-  React.useEffect(() => {
-    async function fetchNotifications() {
-      try {
-        const response = await httpGet('/notifications')
-
-        const { result } = response
-
-        await dispatch(loadNotifications(result))
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchNotifications()
-  }, [])
 
   return (
     <React.Fragment>

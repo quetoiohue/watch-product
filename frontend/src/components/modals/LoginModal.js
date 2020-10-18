@@ -7,6 +7,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import ButtonSubmit from '../core/ButtonSubmit'
 import { httpPost } from '../../helpers/http'
 import { Facebook } from '@material-ui/icons'
+import { displayModal } from '../../reducers/actions/modal'
 
 const LoginModal = () => {
   const history = useHistory()
@@ -14,6 +15,8 @@ const LoginModal = () => {
   const responseFacebook = async (response) => {
     try {
       console.log(response)
+
+      await displayModal('spinner-loading')
 
       const userInfo = await httpPost(
         '/auth/login/facebook',

@@ -1,9 +1,21 @@
+import { httpGet } from '../../helpers/http'
 import * as notificationTypes from '../actionTypes/notifications'
+import store from '../../store'
 
-export const loadNotifications = (payload) => {
-  return {
-    type: notificationTypes.LOAD_NOTIFICATIONS,
-    payload,
+export const loadNotifications = async (payload) => {
+  try {
+    const response = await httpGet('/notifications')
+
+    const { result } = response
+
+    store.dispatch({
+      type: notificationTypes.LOAD_NOTIFICATIONS,
+      payload: result,
+    })
+
+    return result
+  } catch (error) {
+    console.log(error)
   }
 }
 

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { hideModal } from '../../reducers/actions/modal'
 import ErrorModal from './ErrorModal'
 import SuccessModal from './SuccessModal'
+import ConfirmModal from './ConfirmModal'
+import SpinnerLoading from './SpinnerLoading'
 
 const DynamicModal = () => {
   const dispatch = useDispatch()
@@ -17,7 +19,10 @@ const DynamicModal = () => {
         return <SuccessModal text={props.text} />
       case 'error-modal':
         return <ErrorModal text={props.text} />
-
+      case 'confirm-modal':
+        return <ConfirmModal {...props} />
+      case 'spinner-loading':
+        return <SpinnerLoading />
       default:
         return null
     }
@@ -37,7 +42,11 @@ const DynamicModal = () => {
       }}
     >
       <Fade in={!!modal}>
-        <div className="modal__container">
+        <div
+          className={`modal__container ${
+            modal === 'spinner-loading' && 'is__spinner-loading'
+          }`}
+        >
           <header className="modal__header">
             <IconButton onClick={handleConfirm} className="modal__header--btn">
               <Close />
@@ -61,6 +70,12 @@ const ModalContainer = styled(Modal)`
     background: #fff;
 
     outline: none;
+
+    &.is__spinner-loading {
+      .modal__header--btn {
+        visibility: hidden;
+      }
+    }
   }
 
   .modal__header {

@@ -1,4 +1,6 @@
 import * as userActionTypes from '../actionTypes/user'
+import store from '../../store'
+import { httpGet } from '../../helpers/http'
 
 export const setAuthToken = (authToken) => {
   return {
@@ -7,10 +9,23 @@ export const setAuthToken = (authToken) => {
   }
 }
 
-export const loadUser = (payload) => {
-  return {
-    type: userActionTypes.LOAD_USER,
-    payload,
+export const loadUser = async (payload) => {
+  try {
+    const response = await httpGet('/users/whoami')
+
+    const { result } = response
+
+    store.dispatch({
+      type: userActionTypes.LOAD_USER,
+      payload: result,
+    })
+
+    return result
+  } catch (error) {
+    console.log(error)
+
+    localStorage.removeItem('authToken')
+    window.location.href = '/landing'
   }
 }
 

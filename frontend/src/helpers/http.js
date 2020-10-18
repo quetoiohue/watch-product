@@ -25,7 +25,7 @@ axios.interceptors.request.use(
 )
 
 const handleGeneralError = (error) => {
-  console.log(error)
+  console.log('error >>>>', error)
 }
 
 const handleGeneralSuccess = (response) => {

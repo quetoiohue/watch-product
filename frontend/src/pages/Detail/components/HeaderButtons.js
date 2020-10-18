@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { httpDelete } from '../../../helpers/http'
 import ButtonSubmit from '../../../components/core/ButtonSubmit'
 import { deleteProduct } from '../../../reducers/actions/user'
-import { displayModal } from '../../../reducers/actions/modal'
+import { displayModal, hideModal } from '../../../reducers/actions/modal'
 import { useHistory } from 'react-router-dom'
 
 const HeaderButtons = () => {
@@ -15,21 +15,32 @@ const HeaderButtons = () => {
 
   const handleDeleteProduct = async () => {
     try {
-      await httpDelete(`/products/${editingProduct.id}`)
-
-      dispatch(deleteProduct(editingProduct))
-
-      const isConfirmed = await displayModal('success-modal', {
-        text: `Product ${editingProduct.id} has been deleted.`,
+      const isConfirmed = await displayModal('confirm-modal', {
+        text: `Are you sure delete this item?`,
       })
 
       if (isConfirmed !== null) {
-        history.push('/')
+        await displayModal('spinner-loading')
+        const response = await httpDelete(`/products/${editingProduct.id}`)
+
+        if (!response) throw Error('Fetch api fail!')
+
+        await dispatch(deleteProduct(editingProduct))
+
+        const isSuccessConfirmed = await displayModal('success-modal', {
+          text: `Product ${editingProduct.id} has been deleted.`,
+        })
+
+        if (isSuccessConfirmed !== null) {
+          history.push('/')
+        }
       }
     } catch (error) {
       await displayModal('error-modal', {
         text: `There's something wrong.`,
       })
+    } finally {
+      // dispatch(hideModal())
     }
   }
 

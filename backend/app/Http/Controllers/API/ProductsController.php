@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
+use Stripe\Product;
 
 class ProductsController extends Controller {
 
@@ -139,13 +140,20 @@ class ProductsController extends Controller {
     }
 
     public function delete($productId) {
-        $result = Products::destroy($productId);
+        try {
+            Products::find($productId)->productNotifications()->delete();
+            Products::find($productId)->productHistories()->delete();
+            $result = Products::destroy($productId);
 
-        if ($result > 0) {
-            return $this->responseSuccess(200, "Product has been deleted");
-        } else {
-            return $this->responseBadRequest(400, "Product not found");
+            if ($result > 0) {
+                return $this->responseSuccess(200, "Product has been deleted");
+            } else {
+                return $this->responseBadRequest(400, "Product not found");
+            }
+        } catch (Exception $error) {
+            return $this->responseServerError(500,$error);
         }
+        
     }
     
     public function productCrawlerForGuest(Request $request) {

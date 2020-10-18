@@ -2,14 +2,14 @@ import * as modalActionTypes from '../actionTypes/modal'
 import defer from 'defer-promise'
 import store from '../../store'
 
-export const displayModal = (modal, props) => {
+export const displayModal = async (modal, props) => {
   if (props === null) {
     store.dispatch(hideModal())
 
     return
   }
 
-  window.modalDeferred = defer()
+  window.modalDeferred = await defer()
 
   store.dispatch({
     type: modalActionTypes.DISPLAY_MODAL,
