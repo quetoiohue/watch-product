@@ -25,7 +25,7 @@ class NewPrice implements ShouldBroadcastNow
      */
     public function __construct(Notifications $notification, Products $product)
     {
-        $this->notification = $notification;
+        $this->notification = Notifications::find($notification->id);
         $this->notification->product = $product;
     }
 

@@ -36,7 +36,7 @@ class Products extends Model
   }
 
   public function productNotifications() {
-    return $this->hasMany('App\Notifications', 'product_id', 'id');
+    return $this->hasMany('App\Notifications', 'product_id', 'id')->orderBy('created_at', 'desc');
   }
 
   public function getCurrentPriceAttribute()

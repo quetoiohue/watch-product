@@ -16,11 +16,27 @@ class NotificationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
+    public function date_sort($a, $b) {
+        return strtotime($b['created_at']) - strtotime($a['created_at']);
+    }
+
     public function index()
     {
-        $notifications = Notifications::orderBy('created_at', 'desc')->get();
+        $user = Auth::user();
+        $notifications = $user->products->pluck('productNotifications');
 
-        return $this->responseSuccess(200, $notifications);
+        $productNotifications = [];
+
+        foreach ($notifications as $productNotification) {
+            $productNotification = json_decode(json_encode($productNotification), true);
+            $productNotifications = array_merge($productNotifications, $productNotification);
+        }
+
+
+        usort($productNotifications, array($this, "date_sort"));
+        return $this->responseSuccess(200, $productNotifications);
     }
 
     /**

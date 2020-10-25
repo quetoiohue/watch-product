@@ -10,8 +10,8 @@ import { createMarkup } from '../../helpers'
 import { formatDateTime } from '../../helpers/format'
 
 const NotificationListItem = ({ notification }) => {
-  const { product, text, status } = notification || {}
-  const { image, name, created_at } = product || {}
+  const { product, text, status, created_at } = notification || {}
+  const { image, name } = product || {}
 
   return (
     <MenuItemContainer
@@ -26,8 +26,8 @@ const NotificationListItem = ({ notification }) => {
         primary={<span className="item__name">{name}</span>}
         secondary={
           <React.Fragment>
-            <p className="item__time">{formatDateTime(created_at)}</p>
-            <p
+            <div className="item__time">{formatDateTime(created_at)}</div>
+            <div
               className="item__price"
               dangerouslySetInnerHTML={createMarkup(text)}
             />

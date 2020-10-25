@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
       }
     case notificationTypes.APPEND_NOTIFICATION:
       return {
-        notifications: [...state.notifications, action.payload],
+        notifications: [action.payload, ...state.notifications],
       }
     case notificationTypes.UPDATE_NOTIFICATION:
       const updatedNotifications = state.notifications.map((_notify) => {

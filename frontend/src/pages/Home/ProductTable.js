@@ -1,16 +1,14 @@
 import { TableCell, TableHead, TableRow } from '@material-ui/core'
 import { NotificationsActive } from '@material-ui/icons'
-import styled from 'styled-components'
-
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 import FadeTable from '../../components/core/FadeTable'
 import { getAlert } from '../../helpers'
 import { formatDate, formatMoney, formatMonth } from '../../helpers/format'
-import { addProduct, setEditingProduct } from '../../reducers/actions/user'
 import { httpPost } from '../../helpers/http'
-import { displayModal } from '../../reducers/actions/modal'
+import { setEditingProduct } from '../../reducers/actions/user'
 
 export default function ProductTable(props) {
   const history = useHistory()
@@ -22,7 +20,7 @@ export default function ProductTable(props) {
     async function fetchLinksFromDemo() {
       const links = JSON.parse(localStorage.getItem('links'))
       if (links?.length) {
-        const response = await httpPost(
+        await httpPost(
           '/products',
           {
             links,

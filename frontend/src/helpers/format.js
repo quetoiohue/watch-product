@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const formatMoney = (number, currency = 'VND') => {
   return new Intl.NumberFormat('vie', {
     style: 'currency',
@@ -10,7 +12,7 @@ export const formatMoney = (number, currency = 'VND') => {
 }
 
 export const formatDate = (date) => {
-  return new Intl.DateTimeFormat('en-US').format(new Date(date))
+  return moment(date).format('DD MMM YYYY')
 }
 
 export const formatMonth = (date) => {
@@ -19,22 +21,5 @@ export const formatMonth = (date) => {
 }
 
 export const formatDateTime = (date) => {
-  date = new Date(date)
-  var hours = date.getHours()
-  var minutes = date.getMinutes()
-  var ampm = hours >= 12 ? 'pm' : 'am'
-  hours = hours % 12
-  hours = hours ? hours : 12 // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0' + minutes : minutes
-  var strTime = hours + ':' + minutes + ' ' + ampm
-  return (
-    date.getMonth() +
-    1 +
-    '/' +
-    date.getDate() +
-    '/' +
-    date.getFullYear() +
-    ' ' +
-    strTime
-  )
+  return moment(date).format('DD MMM YYYY HH:MM:ss')
 }

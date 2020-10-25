@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import LoadingImage from '../../assets/images/loading.gif'
 
 const SpinnerLoading = () => {
   const loadingTimeout = React.useRef(null)
@@ -29,7 +30,7 @@ const SuccessModalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('/static/media/loading.408292d8.gif');
+    background-image: url(${LoadingImage});
     background-repeat: no-repeat;
     padding: 0;
     background-size: cover;
