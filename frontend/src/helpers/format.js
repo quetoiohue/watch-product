@@ -7,7 +7,7 @@ export const formatMoney = (number, currency = 'VND') => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })
-    .format(number?.toFixed(0))
+    .format(Number(number)?.toFixed(0))
     .replace(new RegExp('[.]', 'g'), ',')
 }
 
