@@ -66,7 +66,7 @@ const LoginModal = () => {
       </Typography>
       <div className="btn__wrapper">
         <FacebookLogin
-          appId={`223847348301833`}
+          appId={`1018593771993374`}
           fields="name,email,picture"
           callback={responseFacebook}
           render={(renderProps) => (
@@ -105,6 +105,7 @@ const LoginModal = () => {
             </ButtonSubmit>
           )}
           buttonText="Login"
+          autoLoad={false}
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
