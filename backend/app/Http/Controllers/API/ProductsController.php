@@ -119,7 +119,7 @@ class ProductsController extends Controller {
                 'alert_type_id' => $alertType['id']
             ])->first();
             // decrement point
-            if (!$productAlertType || $alertType['value'] && !$productAlertType->status) {
+            if ($alertType['value'] && (!$productAlertType || !$productAlertType->status)) {
                 
                 if ($user->total_point < $defaultAlertType->point_charge) {
                     return $this->responseBadRequest(400, "Not enough point");

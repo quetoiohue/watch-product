@@ -16,7 +16,7 @@ class CreateProductHistoriesTable extends Migration
         Schema::create('product_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->double('price');
             $table->timestamps();

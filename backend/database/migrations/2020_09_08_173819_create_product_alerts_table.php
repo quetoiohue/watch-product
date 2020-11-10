@@ -17,10 +17,10 @@ class CreateProductAlertsTable extends Migration
             $table->bigIncrements('id');
 
             $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->bigInteger('alert_type_id')->unsigned();
-            $table->foreign('alert_type_id')->references('id')->on('alert_types');
+            $table->foreign('alert_type_id')->references('id')->on('alert_types')->onDelete('cascade');
 
             $table->boolean('status')->default(false);
         });

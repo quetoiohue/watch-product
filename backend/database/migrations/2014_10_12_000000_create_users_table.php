@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->boolean('verified')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('total_point');
-            $table->string('password');
             $table->timestamps();
         });
     }

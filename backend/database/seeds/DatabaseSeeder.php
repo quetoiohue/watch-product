@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             // UsersSeeder::class,
             // ProductsSeeder::class,
             // ProductHistoriesSeeder::class,
-            ProductAlertsSeeder::class,
+            // ProductAlertsSeeder::class,
             AlertTypesSeeder::class,
             PackageTypesSeeder::class,
         ]);

@@ -52,13 +52,12 @@ class AuthController extends Controller
 
     public function checkUserByEmail($profile) {
         $user = User::where('email', $profile['email'])->first();
-
+        
         if (!$user) {
             $user = new User;
 
             $user->name = $profile['name'];
             $user->email = $profile['email'];
-            $user->password = bcrypt(Str::random(8));
             $user->telephone = '';
             $user->total_point = 3;
             $user->verified = true;
@@ -68,7 +67,7 @@ class AuthController extends Controller
             'email' => $user['email'],
             'email_verified_at' => Carbon::now(),
         ])->save();
-
+        
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         $token->expires_at = Carbon::now()->addMonths(6);
