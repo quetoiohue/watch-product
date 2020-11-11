@@ -19,7 +19,6 @@ const NotificationList = ({ handleClose }) => {
           notification_ids: [_notification.id],
         })
 
-        console.log(response.result)
         dispatch(updateNotifications(response.result))
       }
 

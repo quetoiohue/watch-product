@@ -49,6 +49,7 @@ const FadeTableContainer = styled.div`
     td,
     th {
       padding: 12px 16px;
+      padding-right: 12px;
       font-size: 13px;
       line-height: 17px;
     }

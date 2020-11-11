@@ -70,7 +70,7 @@ export default function ProductTable(props) {
           <TableCell component="th" scope="row">
             <div className="product__info">
               <img src={row.image} alt="product" />
-              <p>{row.name}</p>
+              <div>{row.name}</div>
             </div>
           </TableCell>
           <TableCell
@@ -108,7 +108,16 @@ export default function ProductTable(props) {
             -{row.discount}%
           </TableCell>
           <TableCell style={{ width: 150 }} align="right">
-            {formatDate(row.created_at)}
+            <div className="relative">
+              {formatDate(row.created_at)}
+              <div
+                className={`product__status ${
+                  row.inventory_status !== 'available' && 'grey'
+                }`}
+              >
+                {row.inventory_status}
+              </div>
+            </div>
           </TableCell>
         </TableRowInner>
       ))}
@@ -190,6 +199,9 @@ export default function ProductTable(props) {
 const TableContainer = styled.div`
   .table__body {
     max-height: 400px;
+    .relative {
+      position: relative;
+    }
     td,
     th {
       &.font-medium {
@@ -210,6 +222,23 @@ const TableContainer = styled.div`
           width: 50px;
           height: auto;
           margin-right: 8px;
+        }
+      }
+
+      .product__status {
+        position: absolute;
+        top: -22px;
+        right: -2px;
+        padding: 1px 12px 2px 12px;
+        border-radius: 24px;
+        color: #fff;
+        background: var(--primary-color);
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: capitalize;
+
+        &.grey {
+          background: var(--gray-1);
         }
       }
 

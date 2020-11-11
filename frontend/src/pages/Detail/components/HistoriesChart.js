@@ -28,15 +28,22 @@ const defaultData = {
 
 export default function HistoriesChart() {
   const { editingProduct } = useSelector((state) => state.user)
-  const { product_histories } = editingProduct || {}
+  const { product_histories, actual_price, updated_at } = editingProduct || {}
   const chartRef = React.useRef()
 
   const historyChart = React.useMemo(() => {
+    if (!editingProduct) return []
+
     const label = 'Price'
-    const labels = product_histories?.map((_history) =>
+    const productHistories = [
+      ...product_histories,
+      { price: actual_price, updated_at },
+    ]
+
+    const labels = productHistories?.map((_history) =>
       formatDate(_history.updated_at)
     )
-    const data = product_histories?.map((_history) => _history.price / 1000)
+    const data = productHistories?.map((_history) => _history.price / 1000)
 
     defaultData.labels = labels
     defaultData.datasets[0].label = label
@@ -58,7 +65,7 @@ export default function HistoriesChart() {
     }
 
     return <Line ref={chartRef} data={defaultData} options={options} />
-  }, [product_histories])
+  }, [product_histories, actual_price, updated_at])
 
   return (
     <div>
