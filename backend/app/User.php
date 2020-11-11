@@ -40,7 +40,7 @@ class User extends Authenticatable
     ];
 
     public function products() {
-        return $this->hasMany('App\Products', 'user_id', 'id');
+        return $this->hasMany('App\Products', 'user_id', 'id')->orderBy('created_at', 'desc');
     }
 
     public function productAlerts() {

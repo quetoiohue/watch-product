@@ -11,12 +11,10 @@ import {
   NotificationsNone,
 } from '@material-ui/icons'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { getNoReadNotification } from '../../helpers'
-import { appendNotifications } from '../../reducers/actions/notification'
-import singlePusher from '../../services/pusher'
 import Modal from '../core/Modal'
 import AddProductModal from '../modals/AddProductModal'
 import LightLogo from './LightLogo'
@@ -24,7 +22,6 @@ import NotificationList from './NotificationList'
 
 const AppHeader = (props) => {
   const history = useHistory()
-  const dispatch = useDispatch()
   const { notifications } = useSelector((state) => state.notifications)
   const container = React.useRef(null)
   const [openAddProduct, setOpenAddProduct] = React.useState(false)
@@ -33,23 +30,6 @@ const AppHeader = (props) => {
 
   const open = Boolean(anchorNotify)
   const openMenu = Boolean(anchorMenu)
-
-  React.useEffect(() => {
-    function messageEventHandler(data) {
-      console.log(data)
-      dispatch(appendNotifications(data.notification))
-    }
-
-    const pusher = singlePusher.getInstance()
-    let channel = pusher.subscribe('trigger-price')
-    channel.bind('trigger-event', messageEventHandler)
-
-    return () => {
-      channel.unbind()
-      pusher.unsubscribe(channel)
-      pusher.disconnect()
-    }
-  }, [dispatch])
 
   const onClickSetting = () => {
     handleCloseMenu()
