@@ -1,7 +1,7 @@
 # install composer
 
 -   `php artisan queue:table`
--   `php artisan migrate:fresh`
+-   `php artisan migrate:fresh --seed`
 -   `php artisan passport:client --personal`
 -   `php artisan serve`
 

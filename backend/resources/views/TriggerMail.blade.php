@@ -12,10 +12,10 @@
        <span>Product name: </span>  {{ $product->name }}
     </p>
     <p class="bio">
-        <span>Price change: </span> from <span class="price"> {{ $product->actual_price }} {{ $product->currency }} </span>  to <span class="price"> {{ $product->lastCheckedPrice}} {{ $product->currency }} </span> 
+        <span>Price change: </span> from <span class="price"> {{ $product->lastCheckedPrice }} {{ $product->currency }} </span>  to <span class="price"> {{$product->actual_price }} {{ $product->currency }} </span> 
     </p>
     <p class="bio">
-        <span>Discount: </span> {{ $product->discount }}
+        <span>Discount: </span> {{ $product->discount }}%
     </p>
     <div class="bio">
         <a href={{ $product->link }} class="btn-link">

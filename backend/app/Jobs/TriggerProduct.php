@@ -53,7 +53,8 @@ class TriggerProduct implements ShouldQueue
                 // Trigger price                
                 if ($productInfo['price'] != $this->product->actual_price) {
                     // Add product history
-                    $productHistory = new ProductHistories();
+                    echo "Trigger change";
+                    $productHistory = new ProductHistories;
                     $productHistory->product_id = $this->product->id;
                     $productHistory->price = $this->product->actual_price;
                     $productHistory->created_at = $this->product->created_at;
@@ -68,7 +69,7 @@ class TriggerProduct implements ShouldQueue
         
                     $this->product->save();
 
-                    $newNotification = new Notifications();
+                    $newNotification = new Notifications;
                     $newNotification->product_id = $this->product->id;
                     $newNotification->text = "<div>Price made change from <strong>" . $productHistory->price . " " .$this->product->currency .
                      "</strong> to <strong>" . $this->product->actual_price . " " . $this->product->currency . "</strong></div>" ;
