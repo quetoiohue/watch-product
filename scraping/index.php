@@ -14,6 +14,7 @@ if(isset($_GET['product_url'])) {
 $regexHmCom = '/hm\.com\//mi';
 $regexShopeeVN = '/shopee\.vn\//mi';
 $regexTiki = '/tiki\.vn\//mi';
+$regexShopNow = '/shopnow/i';
 
 if (preg_match($regexHmCom, $product_url)) {
     require "./sites/hm.com.php";
@@ -27,5 +28,10 @@ if (preg_match($regexShopeeVN, $product_url)) {
 
 if (preg_match($regexTiki, $product_url)) {
     require "./sites/tiki.vn.php";
+    echo getProductByURL($product_url);
+}
+
+if (preg_match($regexShopNow, $product_url)) {
+    require "./sites/shopnow.com.php";
     echo getProductByURL($product_url);
 }
