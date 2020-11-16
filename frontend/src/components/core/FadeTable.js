@@ -44,6 +44,7 @@ const FadeTableContainer = styled.div`
     display: table;
     width: 100%;
     table-layout: fixed;
+    min-height: 74px;
   }
   table tbody {
     td,

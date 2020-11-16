@@ -105,7 +105,7 @@ export default function ProductTable(props) {
             align="right"
             className="font-semibold"
           >
-            -{row.discount}%
+            {row.discount * -1}%
           </TableCell>
           <TableCell style={{ width: 150 }} align="right">
             <div className="relative">
