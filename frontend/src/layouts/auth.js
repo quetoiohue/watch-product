@@ -15,7 +15,7 @@ const AuthLayout = ({ children }) => {
   React.useEffect(() => {
     async function fetchUser() {
       try {
-        await displayModal('spinner-loading')
+        displayModal('spinner-loading')
 
         const response = await Promise.allSettled([
           loadUser(),
@@ -37,6 +37,10 @@ const AuthLayout = ({ children }) => {
 
         localStorage.removeItem('authToken')
         window.location.href = '/landing'
+      } finally {
+        setTimeout(() => {
+          displayModal(null)
+        }, 1000)
       }
     }
 

@@ -3,16 +3,6 @@ import styled from 'styled-components'
 import LoadingImage from '../../assets/images/loading.gif'
 
 const SpinnerLoading = () => {
-  const loadingTimeout = React.useRef(null)
-
-  React.useEffect(() => {
-    loadingTimeout.current = setTimeout(() => {
-      window.modalDeferred.resolve()
-    }, 1000)
-
-    return () => clearTimeout(loadingTimeout)
-  }, [])
-
   return (
     <SuccessModalContainer className="error__modal">
       <div className="error__modal--body" />
