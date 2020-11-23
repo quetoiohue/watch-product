@@ -3,7 +3,7 @@ import defer from 'defer-promise'
 import store from '../../store'
 
 export const displayModal = async (modal, props) => {
-  if (props === null) {
+  if (modal === null) {
     store.dispatch(hideModal())
 
     return

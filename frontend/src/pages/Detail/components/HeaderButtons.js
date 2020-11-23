@@ -31,9 +31,7 @@ const HeaderButtons = () => {
           text: `Product ${editingProduct.id} has been deleted.`,
         })
 
-        if (isSuccessConfirmed !== null) {
-          history.push('/')
-        }
+        history.push('/')
       }
     } catch (error) {
       await displayModal('error-modal', {
