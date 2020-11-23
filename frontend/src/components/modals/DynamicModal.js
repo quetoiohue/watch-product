@@ -28,7 +28,7 @@ const DynamicModal = () => {
 
   const handleConfirm = () => {
     console.log('close')
-    window.modalDeferred.resolve()
+    window.modalDeferred.resolve(null)
   }
 
   return (

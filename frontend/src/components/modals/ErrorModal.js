@@ -3,6 +3,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ErrorModal = ({ text }) => {
+  React.useEffect(() => {
+    setTimeout(() => {
+      window.modalDeferred.resolve(null)
+    }, 2000)
+  }, [])
+
   return (
     <ErrorModalContainer className="error__modal">
       <div className="error__modal--title">Oh! Snap</div>

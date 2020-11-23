@@ -3,6 +3,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 const SuccessModal = ({ text }) => {
+  React.useEffect(() => {
+    setTimeout(() => {
+      window.modalDeferred.resolve(null)
+    }, 2000)
+  }, [])
+
   return (
     <SuccessModalContainer className="error__modal">
       <div className="error__modal--title">Confirmation</div>
