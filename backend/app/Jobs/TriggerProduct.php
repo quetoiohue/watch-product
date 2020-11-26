@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Nexmo\Laravel\Facade\Nexmo;
 use Illuminate\Support\Facades\Log;
+use stdClass;
 
 class TriggerProduct implements ShouldQueue 
 {
@@ -71,25 +72,31 @@ class TriggerProduct implements ShouldQueue
 
                     $newNotification = new Notifications;
                     $newNotification->product_id = $this->product->id;
-                    $newNotification->text = "<div>Price made change from <strong>" . $productHistory->price . " " .$this->product->currency .
+                    $newNotification->text = "<div>The price made change from <strong>" . $productHistory->price . " " .$this->product->currency .
                      "</strong> to <strong>" . $this->product->actual_price . " " . $this->product->currency . "</strong></div>" ;
 
                     $newNotification->save();
                  
-                    event(new NewPrice($newNotification, $this->product));
-
+                    event(new NewPrice());
+                    echo "pass Event";
                     // Handle Alert
                     $productAlerts = $this->product->productAlerts;
                     foreach($productAlerts as $productAlert) {
                         $checkAlertStatus = $productAlert->alert_type_id * $productAlert->status;
 
                         if ($checkAlertStatus == 1) {
-                            Mail::to("quang123@yopmail.com")->send(new TriggerMail($this->product, $productHistory->price));
+                            Mail::to($this->product->user->email)->send(new TriggerMail($this->product, $productHistory->price));
                             echo "Email has been sent";
                         }
 
                         if($checkAlertStatus == 2) {
-                            // $this->sendSms($this->product->user->telephone, $this->product);
+                            $priceChange = new stdClass();
+                            $priceChange->old_price = $productHistory->price;
+                            $priceChange->new_price = $this->product->actual_price;
+                            $priceChange->currency = $this->product->currency;
+                            $priceChange->link = $this->product->link;
+
+                            // $this->sendSms($this->product->user->telephone, $priceChange);
                             echo "Sms has been sent";
                         }
 
@@ -109,12 +116,13 @@ class TriggerProduct implements ShouldQueue
             }               
     }
 
-    public function sendSms($phone, $product) {
+    public function sendSms($phone, $priceChange) {
+        echo $phone;
         try {
             $message = Nexmo::message()->send([
-                'to'   => '84378249933',
-                'from' => 'Vonage APIs',
-                'text' => "Product " . $product->link . " has changed from " . $product->old_price . " to " . $product->actual_price
+                'to'   => $phone,
+                'from' => 'Track Product',
+                'text' => "Product " . $priceChange->link . " has changed from " . $priceChange->old_price . " to " . $priceChange->new_price
             ]);
     
             return ([

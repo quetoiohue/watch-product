@@ -17,16 +17,15 @@ use Stripe\Product;
 class NewPrice implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $notification;
+    public $message;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Notifications $notification, Products $product)
+    public function __construct()
     {
-        $this->notification = Notifications::find($notification->id);
-        $this->notification->product = $product;
+        $this->message = "trigger";
     }
 
     /**
