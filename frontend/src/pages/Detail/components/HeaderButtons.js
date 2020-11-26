@@ -20,7 +20,7 @@ const HeaderButtons = () => {
       })
 
       if (isConfirmed !== null) {
-        await displayModal('spinner-loading')
+        displayModal('spinner-loading')
         const response = await httpDelete(`/products/${editingProduct.id}`)
 
         if (!response) throw Error('Fetch api fail!')
@@ -37,6 +37,8 @@ const HeaderButtons = () => {
       await displayModal('error-modal', {
         text: `There's something wrong.`,
       })
+    } finally {
+      displayModal(null)
     }
   }
 

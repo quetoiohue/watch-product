@@ -18,7 +18,7 @@ const LoginModal = () => {
     try {
       console.log(response)
 
-      await displayModal('spinner-loading')
+      displayModal('spinner-loading')
 
       const userInfo = await httpPost(
         '/auth/login/facebook',
@@ -32,6 +32,8 @@ const LoginModal = () => {
       await history.push('/')
     } catch (error) {
       console.log(error)
+    } finally {
+      displayModal(null)
     }
   }
 
@@ -39,7 +41,7 @@ const LoginModal = () => {
     try {
       console.log(response)
 
-      await displayModal('spinner-loading')
+      displayModal('spinner-loading')
 
       const userInfo = await httpPost(
         '/auth/login/google',
@@ -53,6 +55,8 @@ const LoginModal = () => {
       await history.push('/')
     } catch (error) {
       console.log(error)
+    } finally {
+      displayModal(null)
     }
   }
 

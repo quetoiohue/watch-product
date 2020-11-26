@@ -45,7 +45,7 @@ const Setting = () => {
 
         return
       }
-      await displayModal('spinner-loading')
+      displayModal('spinner-loading')
 
       await httpPut('/users/change-telephone', {
         telephone: telephoneState,
@@ -62,6 +62,7 @@ const Setting = () => {
       })
     } finally {
       setIsProcessing(false)
+      displayModal(null)
     }
   }
 
