@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h2 class="text-center">Tracking Product</h2>
+    <h2 class="text-center">DealHunter</h2>
     <h4> Product made changes:</h4>
     <p class="bio">
        <span>Product name: </span>  {{ $product->name }}
