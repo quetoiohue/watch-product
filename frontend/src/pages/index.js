@@ -1,14 +1,12 @@
-import { Typography } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components'
+import HeaderButtons from './Home/HeaderButtons'
 import ProductTable from './Home/ProductTable'
 
 const HomePage = () => {
   return (
     <HomePageContainer>
-      <Typography className="title" variant="h5">
-        All Products
-      </Typography>
+      <HeaderButtons />
       <section className="table-container">
         <ProductTable />
       </section>
@@ -18,8 +16,4 @@ const HomePage = () => {
 
 export default HomePage
 
-const HomePageContainer = styled.div`
-  .title {
-    margin-bottom: 16px;
-  }
-`
+const HomePageContainer = styled.div``
