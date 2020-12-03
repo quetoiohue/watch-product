@@ -29,7 +29,7 @@ function getProductByURL($product_url) {
         $product->price = (float)$node->filter('#price-preview .pro-price')->text() * 1000;
         $product->price_max = (float)$node->filter('#price-preview del')->text() * 1000;
         $product->currency = 'VND';
-        $product->discount = (float)$node->filter('#price-preview .pro-sale')->text() * -1;
+        $product->discount = (float)$node->filter('#price-preview .pro-sale')->text() * -1 || 0;
         $product->inventory_status = $node->filter('#add-to-cart')->text() == "Thêm vào giỏ" ? "available" : "sold out";
     });
 

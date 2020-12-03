@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NewPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,13 @@ Route::prefix('auth')->group(function() {
 // Guest api
 Route::prefix('guest')->group(function() {
     Route::post('crawler', 'API\ProductsController@productCrawlerForGuest');
+});
+
+// Test broadcast
+Route::get('/broadcast', function() {
+    event(new NewPrice());
+
+    return view('welcome');
 });
 
 Route::middleware(['auth:api'])->group(function () {
