@@ -4,6 +4,12 @@ use Monolog\Handler\StreamHandler;
 use Goutte\Client;
 use Symfony\Component\HttpClient\HttpClient;
 
+function formatMoney($moneyText) {
+    $moneyStr = str_replace(',', '', $moneyText);
+    
+    return (float)$moneyStr;
+}
+
 function getProductByURL($product_url) {
     // create a log channel
     $log = new Logger($product_url);
@@ -26,10 +32,20 @@ function getProductByURL($product_url) {
 
     $crawler->filter('#detail-product')->each(function ($node) use($product) {
         $product->title = $node->filter('.product-title h1')->text();
-        $product->price = (float)$node->filter('#price-preview .pro-price')->text() * 1000;
-        $product->price_max = (float)$node->filter('#price-preview del')->text() * 1000;
+        $product->price = formatMoney($node->filter('#price-preview .pro-price')->text());
         $product->currency = 'VND';
-        $product->discount = (float)$node->filter('#price-preview .pro-sale')->text() * -1 || 0;
+
+        if ($node->filter('#price-preview del')->count()) {
+            // The promotion product 
+
+            $product->price_max = formatMoney($node->filter('#price-preview del')->text());
+            $product->discount = ((float)str_replace('%', '', $node->filter('#price-preview .pro-sale')->text())) * -1;
+        } else {
+            // None of promotion product 
+
+            $product->price_max = $product->price;
+            $product->discount = 0;
+        }
         $product->inventory_status = $node->filter('#add-to-cart')->text() == "Thêm vào giỏ" ? "available" : "sold out";
     });
 
