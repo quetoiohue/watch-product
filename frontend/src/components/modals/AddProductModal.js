@@ -67,7 +67,7 @@ const AddProductModal = ({ close }) => {
       const newProduct = response.result
       dispatch(addProduct(newProduct))
       await displayModal('success-modal', {
-        text: 'Product has been saved successfully.',
+        text: 'The product has been saved successfully.',
       })
 
       history.push('/')
@@ -86,7 +86,7 @@ const AddProductModal = ({ close }) => {
   return (
     <AddProductModalContainer>
       <div className="form__control">
-        <div className="form__label fs-14">Product url</div>
+        <div className="form__label fs-14">The product url</div>
         <InputField
           value={link}
           name="link"

@@ -36,6 +36,7 @@ const AlertBoard = ({ alerts, onChangeAlertStatus }) => {
           onChange={onChangeAlertStatus}
           color="primary"
           name="sms"
+          disabled={true}
         />
       </div>
     </section>
