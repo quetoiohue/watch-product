@@ -12,32 +12,32 @@ import { addProduct } from '../../reducers/actions/user'
 
 const HeaderButtons = () => {
   const dispatch = useDispatch()
-  const { products } = useSelector(state => state.user.user) || []
-  const links = products?.map(product => ({ link: product?.link })) || []
-  console.log(links)
-  const importExcel = event => {
+  const { products } = useSelector((state) => state.user.user) || []
+  const links = products?.map((product) => ({ link: product?.link })) || []
+
+  const importExcel = (event) => {
     event.persist()
     const { files } = event.target
 
-    readXlsxFile(files[0]).then(async rows => {
+    readXlsxFile(files[0]).then(async (rows) => {
       try {
         displayModal('spinner-loading')
 
-        const linkList = links?.map(_link => _link.link)
+        const linkList = links?.map((_link) => _link.link)
         const importedLinks = rows.slice(1, rows.length)
         const mergeLinkArray = importedLinks.reduce((a, b) => {
           return [...a, ...b]
         }, [])
 
         let uniqueLinks = mergeLinkArray.filter(
-          _link => !linkList.includes(_link)
+          (_link) => !linkList.includes(_link)
         )
         uniqueLinks = [...new Set(uniqueLinks)]
 
         const response = await httpPost(
           '/products',
           {
-            links: uniqueLinks
+            links: uniqueLinks,
           },
           {}
         )
@@ -46,11 +46,11 @@ const HeaderButtons = () => {
 
         dispatch(addProduct(result))
         await displayModal('success-modal', {
-          text: 'Products have been saved successfully.'
+          text: 'Products have been saved successfully.',
         })
       } catch (error) {
         await displayModal('error-modal', {
-          text: `There's something wrong.`
+          text: `There's something wrong.`,
         })
       } finally {
         displayModal(null)

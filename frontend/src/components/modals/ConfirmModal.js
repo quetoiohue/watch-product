@@ -4,11 +4,9 @@ import ButtonSubmit from '../core/ButtonSubmit'
 
 const ConfirmModal = ({ text, cancelText = 'Cancel', confirmText = 'OK' }) => {
   const handleConfirm = () => {
-    console.log('OK')
     window.modalDeferred.resolve()
   }
   const handleCancel = () => {
-    console.log('Cancel')
     window.modalDeferred.resolve(null)
   }
   return (

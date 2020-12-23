@@ -9,7 +9,7 @@ import SpinnerLoading from './SpinnerLoading'
 import SuccessModal from './SuccessModal'
 
 const DynamicModal = () => {
-  const { modal, props } = useSelector(state => state.modal)
+  const { modal, props } = useSelector((state) => state.modal)
 
   const ModalType = () => {
     switch (modal) {
@@ -27,7 +27,6 @@ const DynamicModal = () => {
   }
 
   const handleConfirm = () => {
-    console.log('close')
     window.modalDeferred.resolve(null)
   }
 
@@ -36,7 +35,7 @@ const DynamicModal = () => {
       open={!!modal}
       closeAfterTransition
       BackdropProps={{
-        timeout: 500
+        timeout: 500,
       }}
     >
       <Fade in={!!modal}>
