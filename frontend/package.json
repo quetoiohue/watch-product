@@ -61,17 +61,12 @@
     "eslint-plugin-prettier": "^3.3.0",
     "prettier": "^2.2.1"
   },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --fix"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --quiet --fix"
-    ],
-    "*.{json,md,html}": [
-      "prettier --write"
-    ]
   }
 }
