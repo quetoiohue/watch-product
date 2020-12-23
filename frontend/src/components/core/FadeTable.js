@@ -8,9 +8,9 @@ const FadeTable = ({ Headers, Rows }) => {
         {Headers}
         <tbody className="table__body">
           {Rows}
-          <div className="last__row" />
+          <tr className="last__row"></tr>
+          <tr className="fade-effect" />
         </tbody>
-        <div className="fade-effect" />
       </table>
     </FadeTableContainer>
   )
@@ -56,7 +56,7 @@ const FadeTableContainer = styled.div`
     }
   }
   .last__row {
-    padding-bottom: 180px;
+    height: 180px;
   }
 
   .fade-effect {

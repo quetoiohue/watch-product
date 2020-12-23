@@ -27,7 +27,7 @@ const HeaderButtons = () => {
 
         await dispatch(deleteProduct(editingProduct))
 
-        const isSuccessConfirmed = await displayModal('success-modal', {
+        await displayModal('success-modal', {
           text: `Product ${editingProduct.id} has been deleted.`,
         })
 

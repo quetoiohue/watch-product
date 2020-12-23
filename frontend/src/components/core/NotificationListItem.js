@@ -26,8 +26,8 @@ const NotificationListItem = ({ notification }) => {
         primary={<span className="item__name">{name}</span>}
         secondary={
           <React.Fragment>
-            <div className="item__time">{formatDateTime(created_at)}</div>
-            <div
+            <span className="item__time">{formatDateTime(created_at)}</span>
+            <span
               className="item__price"
               dangerouslySetInnerHTML={createMarkup(text)}
             />

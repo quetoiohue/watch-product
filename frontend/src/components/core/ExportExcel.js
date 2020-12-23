@@ -10,8 +10,12 @@ const ExportExcel = ({ element, data, name, columns }) => {
     <div>
       <ExcelFile element={element}>
         <ExcelSheet data={data} name={name}>
-          {columns?.map((_col) => (
-            <ExcelColumn label={_col.label} value={_col.value} />
+          {columns?.map((_col, index) => (
+            <ExcelColumn
+              key={`col-${index}`}
+              label={_col.label}
+              value={_col.value}
+            />
           ))}
         </ExcelSheet>
       </ExcelFile>

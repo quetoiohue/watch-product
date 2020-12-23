@@ -16,8 +16,6 @@ const LoginModal = () => {
 
   const responseFacebook = async (response) => {
     try {
-      console.log(response)
-
       displayModal('spinner-loading')
 
       const userInfo = await httpPost(
@@ -39,8 +37,6 @@ const LoginModal = () => {
 
   const responseGoogle = async (response) => {
     try {
-      console.log(response)
-
       displayModal('spinner-loading')
 
       const userInfo = await httpPost(

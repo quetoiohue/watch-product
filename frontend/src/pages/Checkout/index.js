@@ -18,8 +18,6 @@ const Checkout = () => {
     fetchPackages()
   }, [])
 
-  console.log(packageTypes)
-
   const headerBar = (
     <>
       <span className="title">Price</span>

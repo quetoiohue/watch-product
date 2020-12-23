@@ -19,7 +19,6 @@ const FooterButtons = ({ alerts }) => {
 
   const onClickNext = async () => {
     try {
-      console.log('next', alerts)
       setIsWorking(true)
 
       const response = await httpPut(`/products/${editingProduct.id}`, {
@@ -39,6 +38,7 @@ const FooterButtons = ({ alerts }) => {
 
       dispatch(updateProduct(result))
 
+      setIsWorking(false)
       await displayModal('success-modal', {
         text: 'Your changes have been saved.',
       })
@@ -48,10 +48,7 @@ const FooterButtons = ({ alerts }) => {
         text: 'Your point is not enough to make change.',
       })
       history.push('/checkout')
-    } finally {
-      setIsWorking(false)
     }
-    // onClickSkip()
   }
 
   return (

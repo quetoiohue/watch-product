@@ -25,7 +25,6 @@ const AppRoute = () => {
     let channel = pusher.subscribe('trigger-price')
     channel.bind('trigger-event', messageEventHandler)
 
-    console.log(pusher)
     return () => {
       channel.unbind()
       pusher.unsubscribe(channel)

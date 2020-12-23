@@ -58,10 +58,12 @@ export default function DemoTable(props) {
     Headers: (
       <React.Fragment>
         <TableHead>
-          <TableCell>Product</TableCell>
-          <TableCell style={{ width: 250 }} align="center">
-            Price
-          </TableCell>
+          <TableRow>
+            <TableCell>Product</TableCell>
+            <TableCell style={{ width: 250 }} align="center">
+              Price
+            </TableCell>
+          </TableRow>
         </TableHead>
       </React.Fragment>
     ),

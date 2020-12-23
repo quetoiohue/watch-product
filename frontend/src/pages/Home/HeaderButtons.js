@@ -14,7 +14,6 @@ const HeaderButtons = () => {
   const dispatch = useDispatch()
   const { products } = useSelector((state) => state.user.user) || []
   const links = products?.map((product) => ({ link: product?.link })) || []
-  const inputRef = React.useRef(null)
 
   const importExcel = (event) => {
     event.persist()
@@ -25,7 +24,7 @@ const HeaderButtons = () => {
         displayModal('spinner-loading')
 
         const linkList = links?.map((_link) => _link.link)
-        const [title, ...importedLinks] = rows
+        const importedLinks = rows.slice(1, rows.length)
         const mergeLinkArray = importedLinks.reduce((a, b) => {
           return [...a, ...b]
         }, [])
@@ -50,7 +49,6 @@ const HeaderButtons = () => {
           text: 'Products have been saved successfully.',
         })
       } catch (error) {
-        console.log(error)
         await displayModal('error-modal', {
           text: `There's something wrong.`,
         })
@@ -58,12 +56,6 @@ const HeaderButtons = () => {
         displayModal(null)
       }
     })
-  }
-
-  const exportExcel = () => {
-    const links = products?.map((_link) => _link.link)
-
-    console.log('export pdf', links)
   }
 
   return (

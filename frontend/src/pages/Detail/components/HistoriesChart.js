@@ -65,7 +65,7 @@ export default function HistoriesChart() {
     }
 
     return <Line ref={chartRef} data={defaultData} options={options} />
-  }, [product_histories, actual_price, updated_at])
+  }, [product_histories, actual_price, updated_at, editingProduct])
 
   return (
     <div>

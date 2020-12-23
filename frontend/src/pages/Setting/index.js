@@ -32,7 +32,6 @@ const Setting = () => {
   }
 
   const onSave = async (event) => {
-    console.log(formState)
     event.preventDefault()
 
     try {

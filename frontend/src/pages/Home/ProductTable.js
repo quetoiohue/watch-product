@@ -43,22 +43,24 @@ export default function ProductTable(props) {
   const Headers = (
     <React.Fragment>
       <TableHead>
-        <TableCell>Product</TableCell>
-        <TableCell style={{ width: 150 }} align="right">
-          Alerts
-        </TableCell>
-        <TableCell style={{ width: 150 }} align="right">
-          Actual Price
-        </TableCell>
-        <TableCell style={{ width: 150 }} align="right">
-          Old Price
-        </TableCell>
-        <TableCell style={{ width: 150 }} align="right">
-          Discount
-        </TableCell>
-        <TableCell style={{ width: 150 }} align="right">
-          Date
-        </TableCell>
+        <TableRow>
+          <TableCell>Product</TableCell>
+          <TableCell style={{ width: 150 }} align="right">
+            Alerts
+          </TableCell>
+          <TableCell style={{ width: 150 }} align="right">
+            Actual Price
+          </TableCell>
+          <TableCell style={{ width: 150 }} align="right">
+            Old Price
+          </TableCell>
+          <TableCell style={{ width: 150 }} align="right">
+            Discount
+          </TableCell>
+          <TableCell style={{ width: 150 }} align="right">
+            Date
+          </TableCell>
+        </TableRow>
       </TableHead>
     </React.Fragment>
   )

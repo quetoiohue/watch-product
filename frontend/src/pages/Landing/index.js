@@ -10,7 +10,6 @@ const Landing = () => {
   React.useEffect(() => {
     return () => {
       const links = products.map((_p) => _p.link)
-      console.log('links', products, links)
 
       localStorage.setItem('links', JSON.stringify(links))
     }
