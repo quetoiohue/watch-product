@@ -10,13 +10,13 @@ import NotificationListItem from './NotificationListItem'
 const NotificationList = ({ handleClose }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const { notifications } = useSelector((state) => state.notifications)
+  const { notifications } = useSelector(state => state.notifications)
 
-  const handleClickItem = (_notification) => async () => {
+  const handleClickItem = _notification => async () => {
     try {
       if (!_notification.status) {
         const response = await httpPut('notifications', {
-          notification_ids: [_notification.id],
+          notification_ids: [_notification.id]
         })
 
         dispatch(updateNotifications(response.result))
@@ -30,7 +30,7 @@ const NotificationList = ({ handleClose }) => {
   }
   return (
     <MenuListContainer>
-      {notifications?.map((_notification) => {
+      {notifications?.map(_notification => {
         return (
           <div key={_notification.id} onClick={handleClickItem(_notification)}>
             <NotificationListItem notification={_notification} />

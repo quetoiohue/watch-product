@@ -9,13 +9,13 @@ const Landing = () => {
 
   React.useEffect(() => {
     return () => {
-      const links = products.map((_p) => _p.link)
+      const links = products.map(_p => _p.link)
 
       localStorage.setItem('links', JSON.stringify(links))
     }
   }, [products])
 
-  const handleAddProduct = (newProduct) => {
+  const handleAddProduct = newProduct => {
     setProducts([...products, newProduct])
   }
 

@@ -29,7 +29,7 @@ export default function DemoTable(props) {
 
   const Rows = (
     <React.Fragment>
-      {products?.map((row) => (
+      {products?.map(row => (
         <TableRow key={row.title}>
           <TableCell component="th" scope="row">
             <div className="product__info">
@@ -69,7 +69,7 @@ export default function DemoTable(props) {
     ),
     Rows: (
       <React.Fragment>
-        {products?.map((row) => (
+        {products?.map(row => (
           <TableRow key={row.title} className="mobile__row">
             <TableCell component="th" scope="row">
               <div className="product__img">
@@ -96,7 +96,7 @@ export default function DemoTable(props) {
           </TableRow>
         ))}
       </React.Fragment>
-    ),
+    )
   }
 
   return (

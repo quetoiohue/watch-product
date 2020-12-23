@@ -10,7 +10,7 @@ import { updateProduct } from '../../../reducers/actions/user'
 const FooterButtons = ({ alerts }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const { editingProduct } = useSelector((state) => state.user)
+  const { editingProduct } = useSelector(state => state.user)
   const [isWorking, setIsWorking] = React.useState(false)
 
   const onClickSkip = () => {
@@ -25,13 +25,13 @@ const FooterButtons = ({ alerts }) => {
         alertTypes: [
           {
             id: EMAIL,
-            value: alerts.email,
+            value: alerts.email
           },
           {
             id: SMS,
-            value: alerts.sms,
-          },
-        ],
+            value: alerts.sms
+          }
+        ]
       })
 
       const { result } = response
@@ -40,12 +40,12 @@ const FooterButtons = ({ alerts }) => {
 
       setIsWorking(false)
       await displayModal('success-modal', {
-        text: 'Your changes have been saved.',
+        text: 'Your changes have been saved.'
       })
       history.push('/')
     } catch (error) {
       await displayModal('error-modal', {
-        text: 'Your point is not enough to make change.',
+        text: 'Your point is not enough to make change.'
       })
       history.push('/checkout')
     }

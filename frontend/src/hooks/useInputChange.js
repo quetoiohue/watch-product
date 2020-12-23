@@ -5,15 +5,15 @@ const useInputChange = (defaultValue = null) => {
 
   return [
     state,
-    (event) => {
+    event => {
       const { value, name } = event.target
 
       setState({
         ...state,
-        [name]: value,
+        [name]: value
       })
     },
-    setState,
+    setState
   ]
 }
 

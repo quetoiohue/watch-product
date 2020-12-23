@@ -3,7 +3,7 @@ import originAxios from 'axios'
 import { BASE_URL } from '../constants/config'
 
 const axios = originAxios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_URL
 })
 
 // Add a request interceptor
@@ -24,15 +24,15 @@ axios.interceptors.request.use(
   }
 )
 
-const handleGeneralError = (error) => {
+const handleGeneralError = error => {
   console.log('error >>>>', error)
 }
 
-const handleGeneralSuccess = (response) => {
+const handleGeneralSuccess = response => {
   return response.data
 }
 
-export const httpGet = (url) => {
+export const httpGet = url => {
   return axios.get(url).then(handleGeneralSuccess).catch(handleGeneralError)
 }
 

@@ -7,7 +7,7 @@ import { getAlert } from '../../../helpers'
 import { formatMoney } from '../../../helpers/format'
 
 const ProductInfo = () => {
-  const { editingProduct } = useSelector((state) => state.user)
+  const { editingProduct } = useSelector(state => state.user)
   const {
     image,
     name,
@@ -15,7 +15,7 @@ const ProductInfo = () => {
     old_price,
     discount,
     link,
-    product_alerts,
+    product_alerts
   } = editingProduct || {}
 
   return (
@@ -35,7 +35,7 @@ const ProductInfo = () => {
                 </div>
                 <p className="product__sum--alert">
                   <NotificationsNone />
-                  {product_alerts?.map((_alert) => {
+                  {product_alerts?.map(_alert => {
                     return (
                       <span key={_alert.alert_type_id}>{getAlert(_alert)}</span>
                     )

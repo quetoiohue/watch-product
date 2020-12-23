@@ -2,7 +2,7 @@ import {
   CardElement,
   Elements,
   useElements,
-  useStripe,
+  useStripe
 } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import React from 'react'
@@ -18,11 +18,11 @@ const CheckoutForm = ({ packageType, finish }) => {
   const elements = useElements()
   const { id, amount } = packageType
 
-  const user = useSelector((state) => state.user)
+  const user = useSelector(state => state.user)
   const { name } = user?.user
   const [isProcessing, setIsProcessing] = React.useState(false)
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault()
     try {
       setIsProcessing(true)
@@ -35,7 +35,7 @@ const CheckoutForm = ({ packageType, finish }) => {
 
       if (error) {
         await displayModal('error-modal', {
-          text: `${error.message}`,
+          text: `${error.message}`
         })
 
         return
@@ -45,19 +45,19 @@ const CheckoutForm = ({ packageType, finish }) => {
         '/transaction/stripePayment',
         {
           token,
-          package_type_id: id,
+          package_type_id: id
         },
         {}
       )
 
       await displayModal('success-modal', {
-        text: 'Payment Successfully',
+        text: 'Payment Successfully'
       })
 
       finish()
     } catch (error) {
       await displayModal('error-modal', {
-        text: `There's something wrong.`,
+        text: `There's something wrong.`
       })
     } finally {
       setIsProcessing(false)

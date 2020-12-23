@@ -12,10 +12,10 @@ import { displayModal } from '../../reducers/actions/modal'
 
 const Setting = () => {
   const history = useHistory()
-  const { user } = useSelector((state) => state.user)
+  const { user } = useSelector(state => state.user)
   const { email, telephone, total_point } = user || {}
   const [formState, onChange, setFormState] = useInputChange({
-    telephone: '',
+    telephone: ''
   })
   const [isProcessing, setIsProcessing] = React.useState(false)
 
@@ -23,7 +23,7 @@ const Setting = () => {
 
   React.useState(() => {
     setFormState({
-      telephone,
+      telephone
     })
   }, [telephone])
 
@@ -31,7 +31,7 @@ const Setting = () => {
     history.push('/checkout')
   }
 
-  const onSave = async (event) => {
+  const onSave = async event => {
     event.preventDefault()
 
     try {
@@ -39,7 +39,7 @@ const Setting = () => {
 
       if (!telephoneState) {
         await displayModal('error-modal', {
-          text: `Your telephone is not valid.`,
+          text: `Your telephone is not valid.`
         })
 
         return
@@ -47,17 +47,17 @@ const Setting = () => {
       displayModal('spinner-loading')
 
       await httpPut('/users/change-telephone', {
-        telephone: telephoneState,
+        telephone: telephoneState
       })
 
       await displayModal('success-modal', {
-        text: 'Your change has been saved successfully.',
+        text: 'Your change has been saved successfully.'
       })
 
       history.push('/')
     } catch (error) {
       await displayModal('error-modal', {
-        text: `There's something wrong.`,
+        text: `There's something wrong.`
       })
     } finally {
       setIsProcessing(false)

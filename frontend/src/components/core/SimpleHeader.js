@@ -3,7 +3,7 @@ import React from 'react'
 import ButtonSubmit from './ButtonSubmit'
 import Logo from './Logo'
 
-const SimpleHeader = (props) => {
+const SimpleHeader = props => {
   return (
     <div className="flex-none">
       <Container className="py-2">

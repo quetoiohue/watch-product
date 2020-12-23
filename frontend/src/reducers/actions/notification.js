@@ -2,7 +2,7 @@ import { httpGet } from '../../helpers/http'
 import * as notificationTypes from '../actionTypes/notifications'
 import store from '../../store'
 
-export const loadNotifications = async (payload) => {
+export const loadNotifications = async payload => {
   try {
     const response = await httpGet('/notifications')
 
@@ -10,7 +10,7 @@ export const loadNotifications = async (payload) => {
 
     store.dispatch({
       type: notificationTypes.LOAD_NOTIFICATIONS,
-      payload: result,
+      payload: result
     })
 
     return result
@@ -19,16 +19,16 @@ export const loadNotifications = async (payload) => {
   }
 }
 
-export const appendNotifications = (payload) => {
+export const appendNotifications = payload => {
   return {
     type: notificationTypes.APPEND_NOTIFICATION,
-    payload,
+    payload
   }
 }
 
-export const updateNotifications = (payload) => {
+export const updateNotifications = payload => {
   return {
     type: notificationTypes.UPDATE_NOTIFICATION,
-    payload,
+    payload
   }
 }

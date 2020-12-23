@@ -9,8 +9,8 @@ import React from 'react'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
-  },
+    minWidth: 650
+  }
 })
 
 export default function BasicTable({ Headers, Rows }) {

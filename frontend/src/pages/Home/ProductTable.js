@@ -13,7 +13,7 @@ import { setEditingProduct } from '../../reducers/actions/user'
 export default function ProductTable(props) {
   const history = useHistory()
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
+  const user = useSelector(state => state.user)
   const { products } = user?.user || []
 
   React.useEffect(() => {
@@ -23,7 +23,7 @@ export default function ProductTable(props) {
         await httpPost(
           '/products',
           {
-            links,
+            links
           },
           {}
         )
@@ -35,7 +35,7 @@ export default function ProductTable(props) {
     fetchLinksFromDemo()
   }, [dispatch])
 
-  const onClickRow = async (row) => {
+  const onClickRow = async row => {
     await dispatch(setEditingProduct(row))
     await history.push('/products/' + row.id)
   }
@@ -67,7 +67,7 @@ export default function ProductTable(props) {
 
   const Rows = () => (
     <React.Fragment>
-      {products?.map((row) => (
+      {products?.map(row => (
         <TableRowInner key={row.id} hover onClick={() => onClickRow(row)}>
           <TableCell component="th" scope="row">
             <div className="product__info">
@@ -80,7 +80,7 @@ export default function ProductTable(props) {
             align="right"
             className="product__alerts font-medium"
           >
-            {row.product_alerts.map((_alert) => {
+            {row.product_alerts.map(_alert => {
               return (
                 !!_alert.status && (
                   <div key={_alert.alert_type_id}>{getAlert(_alert)}</div>
@@ -139,7 +139,7 @@ export default function ProductTable(props) {
     ),
     Rows: (
       <React.Fragment>
-        {products?.map((row) => (
+        {products?.map(row => (
           <TableRow
             key={row.id}
             className="mobile__row"
@@ -184,7 +184,7 @@ export default function ProductTable(props) {
           </TableRow>
         ))}
       </React.Fragment>
-    ),
+    )
   }
 
   return (

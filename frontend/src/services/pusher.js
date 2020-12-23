@@ -6,7 +6,7 @@ var singlePusher = (function () {
   function createInstance() {
     const newInstance = new Pusher(process.env.REACT_APP_APP_KEY, {
       cluster: process.env.REACT_APP_APP_CLUSTER,
-      encrypted: true,
+      encrypted: true
     })
 
     return newInstance
@@ -19,7 +19,7 @@ var singlePusher = (function () {
       }
 
       return instance
-    },
+    }
   }
 })()
 

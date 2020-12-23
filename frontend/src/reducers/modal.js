@@ -2,7 +2,7 @@ import * as modalActionTypes from './actionTypes/modal'
 
 const initialState = {
   modal: null,
-  props: null,
+  props: null
 }
 
 export default function reducer(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function reducer(state = initialState, action) {
     case modalActionTypes.DISPLAY_MODAL:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       }
     default:
       return state

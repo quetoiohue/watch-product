@@ -11,7 +11,7 @@ export default [
     path: '/landing',
     component: Landing,
     isPrivate: false,
-    isExact: false,
+    isExact: false
   },
 
   // Authenticated Routes
@@ -19,30 +19,30 @@ export default [
     path: '/',
     component: HomePage,
     isPrivate: true,
-    isExact: true,
+    isExact: true
   },
   {
     path: '/products/:productId',
     component: Detail,
     isPrivate: true,
-    isExact: true,
+    isExact: true
   },
   {
     path: '/products/:productId/alerts',
     component: ProductAlerts,
     isPrivate: true,
-    isExact: true,
+    isExact: true
   },
   {
     path: '/checkout',
     component: Checkout,
     isPrivate: true,
-    isExact: true,
+    isExact: true
   },
   {
     path: '/setting',
     component: Setting,
     isPrivate: true,
-    isExact: true,
-  },
+    isExact: true
+  }
 ]

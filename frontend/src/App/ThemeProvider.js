@@ -5,7 +5,7 @@ import media from './media'
 const Theme = ({ children }) => (
   <ThemeProvider
     theme={{
-      ...media,
+      ...media
     }}
   >
     {children}

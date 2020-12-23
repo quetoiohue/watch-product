@@ -8,11 +8,11 @@ import AlertBoard from './components/AlertBoard'
 import FooterButtons from './components/FooterButtons'
 
 const ProductAlerts = () => {
-  const { user, editingProduct } = useSelector((state) => state.user)
+  const { user, editingProduct } = useSelector(state => state.user)
   const { total_point } = user || {}
   const [alerts, setAlerts] = React.useState({
     email: false,
-    sms: false,
+    sms: false
   })
 
   React.useEffect(() => {
@@ -22,19 +22,19 @@ const ProductAlerts = () => {
       return
     }
 
-    setAlerts((prevAlerts) => ({
+    setAlerts(prevAlerts => ({
       ...prevAlerts,
       email: getAlertValue(product_alerts, EMAIL),
-      sms: getAlertValue(product_alerts, SMS),
+      sms: getAlertValue(product_alerts, SMS)
     }))
   }, [editingProduct])
 
-  const onChangeAlertStatus = (event) => {
+  const onChangeAlertStatus = event => {
     const { checked, name } = event.target
 
-    setAlerts((prevAlerts) => ({
+    setAlerts(prevAlerts => ({
       ...prevAlerts,
-      [name]: checked,
+      [name]: checked
     }))
   }
 

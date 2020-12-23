@@ -21,13 +21,13 @@ const defaultData = {
       pointHoverBorderColor: 'rgba(220,220,220,1)',
       pointHoverBorderWidth: 2,
       pointRadius: 1,
-      pointHitRadius: 10,
-    },
-  ],
+      pointHitRadius: 10
+    }
+  ]
 }
 
 export default function HistoriesChart() {
-  const { editingProduct } = useSelector((state) => state.user)
+  const { editingProduct } = useSelector(state => state.user)
   const { product_histories, actual_price, updated_at } = editingProduct || {}
   const chartRef = React.useRef()
 
@@ -37,13 +37,13 @@ export default function HistoriesChart() {
     const label = 'Price'
     const productHistories = [
       ...product_histories,
-      { price: actual_price, updated_at },
+      { price: actual_price, updated_at }
     ]
 
-    const labels = productHistories?.map((_history) =>
+    const labels = productHistories?.map(_history =>
       formatDate(_history.updated_at)
     )
-    const data = productHistories?.map((_history) => _history.price / 1000)
+    const data = productHistories?.map(_history => _history.price / 1000)
 
     defaultData.labels = labels
     defaultData.datasets[0].label = label
@@ -57,11 +57,11 @@ export default function HistoriesChart() {
               beginAtZero: true,
               callback: function (value) {
                 return `${value}k`
-              },
-            },
-          },
-        ],
-      },
+              }
+            }
+          }
+        ]
+      }
     }
 
     return <Line ref={chartRef} data={defaultData} options={options} />

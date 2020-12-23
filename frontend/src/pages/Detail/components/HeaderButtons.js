@@ -11,12 +11,12 @@ import { deleteProduct } from '../../../reducers/actions/user'
 const HeaderButtons = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const { editingProduct } = useSelector((state) => state.user)
+  const { editingProduct } = useSelector(state => state.user)
 
   const handleDeleteProduct = async () => {
     try {
       const isConfirmed = await displayModal('confirm-modal', {
-        text: `Are you sure delete this item?`,
+        text: `Are you sure delete this item?`
       })
 
       if (isConfirmed !== null) {
@@ -28,14 +28,14 @@ const HeaderButtons = () => {
         await dispatch(deleteProduct(editingProduct))
 
         await displayModal('success-modal', {
-          text: `Product ${editingProduct.id} has been deleted.`,
+          text: `Product ${editingProduct.id} has been deleted.`
         })
 
         history.push('/')
       }
     } catch (error) {
       await displayModal('error-modal', {
-        text: `There's something wrong.`,
+        text: `There's something wrong.`
       })
     } finally {
       displayModal(null)

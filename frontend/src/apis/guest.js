@@ -5,8 +5,8 @@ export default {
     httpPost(
       '/guest/crawler',
       {
-        links,
+        links
       },
       {}
-    ),
+    )
 }

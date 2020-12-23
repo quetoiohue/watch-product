@@ -5,21 +5,21 @@ export const formatMoney = (number, currency = 'VND') => {
     style: 'currency',
     currency,
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    maximumFractionDigits: 0
   })
     .format(Number(number)?.toFixed(0))
     .replace(new RegExp('[.]', 'g'), ',')
 }
 
-export const formatDate = (date) => {
+export const formatDate = date => {
   return moment(date).format('DD MMM YYYY')
 }
 
-export const formatMonth = (date) => {
+export const formatMonth = date => {
   const newDate = new Date(date)
   return `${newDate.getMonth() + 1}.${newDate.getFullYear()}`
 }
 
-export const formatDateTime = (date) => {
+export const formatDateTime = date => {
   return moment(date).format('DD MMM YYYY HH:MM:ss')
 }

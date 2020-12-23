@@ -3,12 +3,12 @@ import {
   Container,
   IconButton,
   MenuItem,
-  Popover,
+  Popover
 } from '@material-ui/core'
 import {
   AccountCircle,
   AddCircleOutline,
-  NotificationsNone,
+  NotificationsNone
 } from '@material-ui/icons'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -20,9 +20,9 @@ import AddProductModal from '../modals/AddProductModal'
 import LightLogo from './LightLogo'
 import NotificationList from './NotificationList'
 
-const AppHeader = (props) => {
+const AppHeader = props => {
   const history = useHistory()
-  const { notifications } = useSelector((state) => state.notifications)
+  const { notifications } = useSelector(state => state.notifications)
   const container = React.useRef(null)
   const [openAddProduct, setOpenAddProduct] = React.useState(false)
   const [anchorNotify, setAnchorNotify] = React.useState(null)
@@ -42,7 +42,7 @@ const AppHeader = (props) => {
     window.location.href = '/landing'
   }
 
-  const handleClick = (event) => {
+  const handleClick = event => {
     setAnchorNotify(event.currentTarget)
   }
 
@@ -50,7 +50,7 @@ const AppHeader = (props) => {
     setAnchorNotify(null)
   }
 
-  const handleClickMenu = (event) => {
+  const handleClickMenu = event => {
     setAnchorMenu(event.currentTarget)
   }
 
@@ -132,9 +132,9 @@ const PopoverStyle =
   window.innerWidth <= 468
     ? {
         top: '0px',
-        left: '-47px',
+        left: '-47px'
       }
     : {
         top: '0px',
-        left: '-50px',
+        left: '-50px'
       }

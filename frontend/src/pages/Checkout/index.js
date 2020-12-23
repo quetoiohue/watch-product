@@ -27,7 +27,7 @@ const Checkout = () => {
 
   const mainContent = (
     <div className="flex items-center justify-center card__wrapper">
-      {packageTypes.map((_package) => (
+      {packageTypes.map(_package => (
         <PackageCard key={_package.id} packageType={_package} />
       ))}
     </div>

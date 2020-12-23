@@ -6,9 +6,9 @@ import { validURL } from '../../helpers/validate'
 import useInputChange from '../../hooks/useInputChange'
 import { displayModal } from '../../reducers/actions/modal'
 
-const FormAddTempProduct = (props) => {
+const FormAddTempProduct = props => {
   const [formState, onChangeInput, setFormState] = useInputChange({
-    link: '',
+    link: ''
   })
   const [isWorking, setIsWorking] = React.useState(false)
 
@@ -20,7 +20,7 @@ const FormAddTempProduct = (props) => {
     }
   }, [])
 
-  const onSubmitProduct = async (event) => {
+  const onSubmitProduct = async event => {
     event.preventDefault()
 
     try {
@@ -28,7 +28,7 @@ const FormAddTempProduct = (props) => {
 
       if (reachedLimit) {
         await displayModal('error-modal', {
-          text: 'You need login to add more.',
+          text: 'You need login to add more.'
         })
 
         return
@@ -46,14 +46,14 @@ const FormAddTempProduct = (props) => {
         return
       }
 
-      if (props.products.some((_p) => _p.link === link)) {
+      if (props.products.some(_p => _p.link === link)) {
         await displayModal('error-modal', { text: 'Your URL exists already.' })
 
         return
       }
 
       const response = await guestApis.crawlingProduct({
-        links: [link],
+        links: [link]
       })
 
       const newProduct = response.result[0]
@@ -65,7 +65,7 @@ const FormAddTempProduct = (props) => {
     } finally {
       setIsWorking(false)
       setFormState({
-        link: '',
+        link: ''
       })
     }
   }

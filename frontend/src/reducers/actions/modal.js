@@ -15,11 +15,11 @@ export const displayModal = async (modal, props) => {
     type: modalActionTypes.DISPLAY_MODAL,
     payload: {
       modal,
-      props,
-    },
+      props
+    }
   })
 
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     window.modalDeferred.promise
       .then(resolve)
       .catch(() => resolve(null))
@@ -35,7 +35,7 @@ export const hideModal = () => {
     type: modalActionTypes.DISPLAY_MODAL,
     payload: {
       modal: null,
-      props: null,
-    },
+      props: null
+    }
   }
 }

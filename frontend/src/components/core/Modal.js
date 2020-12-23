@@ -10,7 +10,7 @@ const BasicModal = ({ isOpen, close, title, children }) => {
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: 500
       }}
     >
       <Fade in={isOpen}>

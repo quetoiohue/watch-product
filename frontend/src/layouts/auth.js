@@ -19,7 +19,7 @@ const AuthLayout = ({ children }) => {
 
         const response = await Promise.allSettled([
           loadUser(),
-          loadNotifications(),
+          loadNotifications()
         ])
 
         const [user] = response
@@ -27,7 +27,7 @@ const AuthLayout = ({ children }) => {
         if (params.productId) {
           const { products } = user?.value
           const editingProduct = products?.find(
-            (_p) => _p.id === Number(params.productId)
+            _p => _p.id === Number(params.productId)
           )
 
           dispatch(setEditingProduct(editingProduct))

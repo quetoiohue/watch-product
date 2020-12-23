@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { formatMoney } from '../../../helpers/format'
 
 const ProductPrices = () => {
-  const { editingProduct } = useSelector((state) => state.user)
+  const { editingProduct } = useSelector(state => state.user)
   const { actual_price, cheapest_price, initial_price } = editingProduct || {}
 
   return (

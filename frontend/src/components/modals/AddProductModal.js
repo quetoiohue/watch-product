@@ -16,10 +16,10 @@ import { addProduct } from '../../reducers/actions/user'
 const AddProductModal = ({ close }) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const user = useSelector((state) => state.user)
+  const user = useSelector(state => state.user)
   const { products } = user?.user
   const [formState, onChangeInput, setFormState] = useInputChange({
-    link: '',
+    link: ''
   })
   const [isWorking, setIsWorking] = React.useState(false)
 
@@ -31,7 +31,7 @@ const AddProductModal = ({ close }) => {
     }
   }, [])
 
-  const onSubmitProduct = async (event) => {
+  const onSubmitProduct = async event => {
     event.preventDefault()
 
     try {
@@ -50,7 +50,7 @@ const AddProductModal = ({ close }) => {
 
       if (!!isExistingProduct) {
         await displayModal('error-modal', {
-          text: 'This product existed already.',
+          text: 'This product existed already.'
         })
 
         return
@@ -59,7 +59,7 @@ const AddProductModal = ({ close }) => {
       const response = await httpPost(
         '/products',
         {
-          links: [link],
+          links: [link]
         },
         {}
       )
@@ -67,18 +67,18 @@ const AddProductModal = ({ close }) => {
       const newProduct = response.result
       dispatch(addProduct(newProduct))
       await displayModal('success-modal', {
-        text: 'The product has been saved successfully.',
+        text: 'The product has been saved successfully.'
       })
 
       history.push('/')
     } catch (error) {
       await displayModal('error-modal', {
-        text: `There's something wrong.`,
+        text: `There's something wrong.`
       })
     } finally {
       setIsWorking(false)
       setFormState({
-        link: '',
+        link: ''
       })
     }
   }

@@ -2,7 +2,7 @@ import {
   Avatar,
   ListItemAvatar,
   ListItemText,
-  MenuItem,
+  MenuItem
 } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components'

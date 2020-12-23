@@ -1,6 +1,6 @@
 import { CALL, EMAIL, SMS } from '../constants'
 
-export const getAlert = (productAlert) => {
+export const getAlert = productAlert => {
   switch (productAlert.alert_type_id) {
     case EMAIL:
       return 'Email'
@@ -14,7 +14,7 @@ export const getAlert = (productAlert) => {
 }
 
 export const getAlertValue = (alerts, alertId) => {
-  const alertItem = alerts?.find((_alert) => _alert.alert_type_id === alertId)
+  const alertItem = alerts?.find(_alert => _alert.alert_type_id === alertId)
 
   if (!alertItem) {
     return false
@@ -24,7 +24,7 @@ export const getAlertValue = (alerts, alertId) => {
 }
 
 export const checkExistingProduct = (products, link) => {
-  return products.some((_p) => _p.link === link)
+  return products.some(_p => _p.link === link)
 }
 
 export function createMarkup(htmlInput) {
@@ -32,5 +32,5 @@ export function createMarkup(htmlInput) {
 }
 
 export function getNoReadNotification(notifications) {
-  return notifications?.filter((_n) => !_n.status).length
+  return notifications?.filter(_n => !_n.status).length
 }
