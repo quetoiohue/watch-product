@@ -14,14 +14,14 @@ import GoogleIcon from '../../assets/images/ic-google.svg'
 const LoginModal = () => {
   const history = useHistory()
 
-  const responseFacebook = async (response) => {
+  const responseFacebook = async response => {
     try {
       displayModal('spinner-loading')
 
       const userInfo = await httpPost(
         '/auth/login/facebook',
         {
-          social_token: response.accessToken,
+          social_token: response.accessToken
         },
         {}
       )
@@ -34,14 +34,14 @@ const LoginModal = () => {
     }
   }
 
-  const responseGoogle = async (response) => {
+  const responseGoogle = async response => {
     try {
       displayModal('spinner-loading')
 
       const userInfo = await httpPost(
         '/auth/login/google',
         {
-          social_token: response.tokenId,
+          social_token: response.tokenId
         },
         {}
       )
@@ -68,7 +68,7 @@ const LoginModal = () => {
           appId={`1018593771993374`}
           fields="name,email,picture"
           callback={responseFacebook}
-          render={(renderProps) => (
+          render={renderProps => (
             <ButtonSubmit
               onClick={renderProps.onClick}
               isWorking={renderProps.isProcessing}
@@ -85,7 +85,7 @@ const LoginModal = () => {
         />
         <GoogleLogin
           clientId={`227371493769-dl0dk46balnt0pcgspoejhm4b8e6706q.apps.googleusercontent.com`}
-          render={(renderProps) => (
+          render={renderProps => (
             <ButtonSubmit
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}

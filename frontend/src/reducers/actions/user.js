@@ -2,14 +2,14 @@ import * as userActionTypes from '../actionTypes/user'
 import store from '../../store'
 import { httpGet } from '../../helpers/http'
 
-export const setAuthToken = (authToken) => {
+export const setAuthToken = authToken => {
   return {
     type: userActionTypes.SET_AUTH_TOKEN,
-    authToken,
+    authToken
   }
 }
 
-export const loadUser = async (payload) => {
+export const loadUser = async payload => {
   try {
     const response = await httpGet('/users/whoami')
 
@@ -17,7 +17,7 @@ export const loadUser = async (payload) => {
 
     await store.dispatch({
       type: userActionTypes.LOAD_USER,
-      payload: result,
+      payload: result
     })
 
     return result
@@ -27,30 +27,30 @@ export const loadUser = async (payload) => {
   }
 }
 
-export const setEditingProduct = (payload) => {
+export const setEditingProduct = payload => {
   return {
     type: userActionTypes.SET_EDITING_PRODUCT,
-    payload,
+    payload
   }
 }
 
-export const addProduct = (payload) => {
+export const addProduct = payload => {
   return {
     type: userActionTypes.ADD_PRODUCT,
-    payload,
+    payload
   }
 }
 
-export const deleteProduct = (payload) => {
+export const deleteProduct = payload => {
   return {
     type: userActionTypes.DELETE_PRODUCT,
-    payload,
+    payload
   }
 }
 
-export const updateProduct = (payload) => {
+export const updateProduct = payload => {
   return {
     type: userActionTypes.UPDATE_PRODUCT,
-    payload,
+    payload
   }
 }
